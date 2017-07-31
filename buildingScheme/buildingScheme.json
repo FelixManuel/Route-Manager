@@ -1,0 +1,58 @@
+{
+  "name": "building_1",
+  "floors":[
+    { "name": "floor_1",
+      "plane": { "rows": 5, "columns": 5 },
+      "elevators":[
+			     { "name": "elevator_1",
+             "coordinate": { "coordinate": [
+                {"x": 0, "y": 0},
+							  {"x": 0, "y": 0}
+              ]},
+			       "floors":[
+               "floor_1", "floor_2"
+					    ]}
+			 ],
+			"rooms":[
+				{ "name": "room_1",
+					"coordinate": { "coordinate": [
+					      {"x": 0, "y": 0},
+								{"x": 0, "y": 0}
+					 ]},
+					"windows":[
+						{ "name": "window_1",
+							"coordinate":{ "coordinate": [
+							  {"x": 0, "y": 0},
+							  {"x": 0, "y": 0}
+              ]}
+            }],
+					"doors":[
+						{	"name": "door_1",
+							"coordinate":{ "coordinate": [
+							  {"x": 0, "y": 0},
+								{"x": 0, "y": 0}
+               ]}
+					 }]
+        }],
+			"stairs":[
+				{	"name": "stairs_1",
+					"coordinate":{ "coordinate": [
+					      {"x": 0, "y": 0},
+					      {"x": 0, "y": 0}
+					 ]},
+					"floors":[
+            "floor_1", "floor_2"
+					]}
+			 ],
+			"hall":[
+				{	"name": "hall_1",
+					"coordinate":{ "coordinate": [
+					      {"x": 0, "y": 0},
+					      {"x": 0, "y": 0}
+						]},
+					"doors":[
+            "door_1", "door_2"
+					]}
+			 ]}
+	]
+}
