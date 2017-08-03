@@ -27,28 +27,9 @@ public class Room {
         this.windows = new ArrayList<>();
     }
     
-    public Room(String name, Coordinate coordinate, ArrayList<Door> doors, ArrayList<Window> windows){
-        this.name = name;
-        this.coordinate = coordinate;
-        this.doors = doors;
-        this.windows = windows;
-    }
-    
     //Getter Methods
-    public String getName(){
-        return this.name;
-    }
-    
-    public Coordinate getCoordinate(){
+    private Coordinate getCoordinate(){
         return this.coordinate;
-    }
-    
-    public ArrayList<Door> getDoors(){
-        return this.doors;
-    }
-    
-    public ArrayList<Window> getWindows(){
-        return this.windows;
     }
     
     //Methods

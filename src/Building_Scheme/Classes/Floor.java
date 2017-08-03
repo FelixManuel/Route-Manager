@@ -13,6 +13,8 @@ public class Floor {
     private ArrayList<Room> rooms;
     private ArrayList<Elevator> elevators;
     private ArrayList<Stairs> stairs;
+    private ArrayList<Door> doors;
+    private ArrayList<Window> windows;
     private static int floorNumber;
     
     //Constructor
@@ -22,38 +24,15 @@ public class Floor {
         this.rooms = new ArrayList<>();
         this.elevators = new ArrayList<>();
         this.stairs = new ArrayList<>();
-    }
-    
-    public Floor(String name, Dimension plane, ArrayList<Room> rooms, ArrayList<Elevator> elevators,
-                 ArrayList<Stairs> stairs){
-        this.name = name;
-        this.plane = plane;
-        this.rooms = rooms;
-        this.elevators = elevators;
-        this.stairs = stairs;
+        this.doors = new ArrayList<>();
+        this.windows = new ArrayList<>();
     }
     
     //Getter Methods
-    public String getName(){
-        return this.name;
-    }
-    
     public Dimension getPlane(){
         return this.plane;
     }
-    
-    public ArrayList<Room> getRooms(){
-        return this.rooms;
-    }
-    
-    public ArrayList<Elevator> getElevators(){
-        return this.elevators;
-    }
-    
-    public ArrayList<Stairs> getStairs(){
-        return this.stairs;
-    }
-    
+
     //Methods
     public void createBuildingPlane(){
         this.plane.createPlane();
@@ -64,6 +43,18 @@ public class Floor {
         
         for (Elevator elevator: this.elevators){
             elevator.createElevator(this.plane);
+        }
+        
+        for (Stairs stairs: this.stairs){
+            stairs.createStairs(this.plane);
+        }
+        
+        for (Door door: this.doors){
+            door.createDoor(plane);
+        }
+        
+        for (Window windows: this.windows){
+            windows.createWindow(plane);
         }
     }
 }

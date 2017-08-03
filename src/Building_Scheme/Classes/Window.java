@@ -22,17 +22,8 @@ public class Window {
         this.coordinate = new Coordinate();
     }
     
-    public Window(String name, Coordinate coordinate){
-        this.name = name;
-        this.coordinate = coordinate;
-    }
-    
     //Getter Methods
-    public String getName(){
-        return this.name;
-    }
-    
-    public Coordinate getCoordinate(){
+    private Coordinate getCoordinate(){
         return this.coordinate;
     }
     

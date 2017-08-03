@@ -14,10 +14,6 @@ public class Coordinate {
         this.coordinate = new Point2D[2];
     }
     
-    public Coordinate(Point2D[] coordinate){
-        this.coordinate = coordinate;
-    }
-    
     //Getter Methods
     public Point2D[] getCoordinate(){
         return this.coordinate;

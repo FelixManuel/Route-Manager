@@ -1,6 +1,8 @@
 package Building_Scheme.Classes;
 
 import Building_Scheme.Utilities.Coordinate;
+import Building_Scheme.Utilities.Dimension;
+import Building_Scheme.Utilities.Point2D;
 import java.util.ArrayList;
 
 /**
@@ -13,6 +15,9 @@ public class Stairs {
     private ArrayList<String> floors;
     private static int stairsNumber;
     
+    //Letter Attributes
+    private static final String REPRESENTATIVE_LETTER = "S";
+    
     //Constructor
     public Stairs(){
         this.name = "Stairs_" + stairsNumber++;
@@ -20,22 +25,27 @@ public class Stairs {
         this.floors = new ArrayList<>();
     }
     
-    public Stairs(String name, Coordinate coordinate, ArrayList<String> floors){
-        this.name = name;
-        this.coordinate = coordinate;
-        this.floors = floors;
-    }
-    
     //Getter Methods
-    public String getName(){
-        return this.name;
-    }
-    
-    public Coordinate getCoordinate(){
+    private Coordinate getCoordinate(){
         return this.coordinate;
     }
     
-    public ArrayList<String> getFloors(){
-        return this.floors;
+    //Methods
+    public void createStairs(Dimension plane){
+        Point2D startingPoint = this.coordinate.getCoordinate()[0];
+        Point2D finalPoint = this.coordinate.getCoordinate()[1];
+        
+        plane.setValue(startingPoint.getX(), startingPoint.getY(), REPRESENTATIVE_LETTER);
+        plane.setValue(finalPoint.getX(), finalPoint.getY(), REPRESENTATIVE_LETTER);
+        
+        for (int i = startingPoint.getX(); i < finalPoint.getX(); i++) {
+            plane.setValue(i, startingPoint.getY(), REPRESENTATIVE_LETTER);
+            plane.setValue(i, finalPoint.getY(), REPRESENTATIVE_LETTER);
+        }
+        
+        for (int i = startingPoint.getY(); i < finalPoint.getY(); i++) {
+            plane.setValue(startingPoint.getX(), i, REPRESENTATIVE_LETTER);
+            plane.setValue(finalPoint.getX(), i, REPRESENTATIVE_LETTER);
+        }
     }
 }

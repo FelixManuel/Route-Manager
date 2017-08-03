@@ -16,6 +16,9 @@ public class Elevator {
     private ArrayList<String> floors;
     private static int elevatorNumber;
     
+    //Letter Attribute
+    private static final String REPRESENTATIVE_LETTER = "E";
+    
     //Constructor
     public Elevator(){
         this.name = "Elevator_" + elevatorNumber++;
@@ -23,28 +26,27 @@ public class Elevator {
         this.floors = new ArrayList<>();
     }
     
-    public Elevator(String name, Coordinate coordinate, ArrayList<String> floors){
-        this.name = name;
-        this.coordinate = coordinate;
-        this.floors = floors;
-    }
-    
     //Getter Methods
-    public String getName(){
-        return this.name;
-    }
-    
-    public Coordinate getCoordinate(){
+    private Coordinate getCoordinate(){
         return this.coordinate;
-    }
-    
-    public ArrayList<String> getFloors(){
-        return this.floors;
     }
     
     //Methods
     public void createElevator(Dimension plane){
         Point2D startingPoint = this.coordinate.getCoordinate()[0];
         Point2D finalPoint = this.coordinate.getCoordinate()[1];
+        
+        plane.setValue(startingPoint.getX(), finalPoint.getY(), REPRESENTATIVE_LETTER);
+        plane.setValue(finalPoint.getX(), finalPoint.getY(), REPRESENTATIVE_LETTER);
+        
+        for (int i = startingPoint.getX(); i < finalPoint.getX(); i++) {
+            plane.setValue(i, startingPoint.getY(), REPRESENTATIVE_LETTER);
+            plane.setValue(i, finalPoint.getY(), REPRESENTATIVE_LETTER);
+        }
+        
+        for (int i = startingPoint.getY(); i < finalPoint.getY(); i++) {
+            plane.setValue(startingPoint.getX(), i, REPRESENTATIVE_LETTER);
+            plane.setValue(finalPoint.getY(), i, REPRESENTATIVE_LETTER);
+        }
     }
 }

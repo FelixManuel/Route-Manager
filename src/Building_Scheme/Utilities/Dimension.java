@@ -21,21 +21,7 @@ public class Dimension {
         this.columns = 0;
     }
     
-    public Dimension(int rows, int columns){
-        this.rows = rows;
-        this.columns = columns;
-        this.plane = new String[rows][columns];
-    }
-    
     //Getter Methods
-    public int getRows(){
-        return this.rows;
-    }
-    
-    public int getColumns(){
-        return this.columns;
-    }
-    
     private String getValue(int row, int column){
         return this.plane[row][column];
     }
@@ -47,10 +33,10 @@ public class Dimension {
     //Methods
     public void createPlane(){
         this.plane = new String[rows][columns];
-        this.fillWithNormalTemperature();
+        this.fillInThePlane();
     }
     
-    private void fillWithNormalTemperature(){
+    private void fillInThePlane(){
         for(int row = 0; row < this.plane.length; row++) {
             for (int column = 0; column < this.plane[row].length; column++) {
                 if(row == 0 || column == 0 || row == this.plane.length-1 || column == this.plane[row].length-1){
