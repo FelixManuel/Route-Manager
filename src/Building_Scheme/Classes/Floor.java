@@ -11,7 +11,6 @@ public class Floor {
     private String name;
     private Dimension plane;
     private ArrayList<Room> rooms;
-    private ArrayList<Hall> halls;
     private ArrayList<Elevator> elevators;
     private ArrayList<Stairs> stairs;
     private static int floorNumber;
@@ -21,17 +20,15 @@ public class Floor {
         this.name = "Floor_" + this.floorNumber++;
         this.plane = new Dimension();
         this.rooms = new ArrayList<>();
-        this.halls = new ArrayList<>();
         this.elevators = new ArrayList<>();
         this.stairs = new ArrayList<>();
     }
     
-    public Floor(String name, Dimension plane, ArrayList<Room> rooms, ArrayList<Hall> halls,
-                 ArrayList<Elevator> elevators, ArrayList<Stairs> stairs){
+    public Floor(String name, Dimension plane, ArrayList<Room> rooms, ArrayList<Elevator> elevators,
+                 ArrayList<Stairs> stairs){
         this.name = name;
         this.plane = plane;
         this.rooms = rooms;
-        this.halls = halls;
         this.elevators = elevators;
         this.stairs = stairs;
     }
@@ -49,15 +46,24 @@ public class Floor {
         return this.rooms;
     }
     
-    public ArrayList<Hall> getHalls(){
-        return this.halls;
-    }
-    
     public ArrayList<Elevator> getElevators(){
         return this.elevators;
     }
     
     public ArrayList<Stairs> getStairs(){
         return this.stairs;
+    }
+    
+    //Methods
+    public void createBuildingPlane(){
+        this.plane.createPlane();
+        
+        for(Room room: this.rooms){
+            room.createRoom(this.plane);
+        }
+        
+        for (Elevator elevator: this.elevators){
+            elevator.createElevator(this.plane);
+        }
     }
 }

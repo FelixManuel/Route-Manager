@@ -2,6 +2,8 @@
 package Building_Scheme.Classes;
 
 import Building_Scheme.Utilities.Coordinate;
+import Building_Scheme.Utilities.Dimension;
+import Building_Scheme.Utilities.Point2D;
 import java.util.ArrayList;
 
 /**
@@ -38,5 +40,11 @@ public class Elevator {
     
     public ArrayList<String> getFloors(){
         return this.floors;
+    }
+    
+    //Methods
+    public void createElevator(Dimension plane){
+        Point2D startingPoint = this.coordinate.getCoordinate()[0];
+        Point2D finalPoint = this.coordinate.getCoordinate()[1];
     }
 }
