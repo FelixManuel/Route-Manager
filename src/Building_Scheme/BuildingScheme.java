@@ -26,7 +26,7 @@ public class BuildingScheme {
     //Methods
     public void buildFloors(){
         for(Floor floor: this.floors){
-            floor.createBuildingPlane();
+            floor.createFloorPlane();
         }
     }
 }

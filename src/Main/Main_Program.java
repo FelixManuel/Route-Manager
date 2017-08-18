@@ -1,6 +1,7 @@
 package Main;
 
 import Building_Scheme.BuildingScheme;
+import Building_Scheme.Classes.Floor;
 import File.BuildingSchemeFile;
 import java.util.Scanner;
 
@@ -18,6 +19,8 @@ public class Main_Program {
         BuildingScheme building = buildingSchemeFile.getBuilding();
         building.buildFloors();
         
-        System.out.println(building.getFloors().get(0).getPlane().toString());
+        for (Floor floor: building.getFloors()) {            
+            System.out.println(floor.getPlane().toString());
+        }
     }
 }

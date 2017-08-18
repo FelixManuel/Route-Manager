@@ -18,11 +18,11 @@ public class BuildingSchemeFile {
     private BuildingScheme building;
     
     //Constuctor
-    public BuildingSchemeFile(String name){
+    public BuildingSchemeFile(String fileName){
         JsonParser parser = new JsonParser();
         Gson gson = new Gson();
         try {
-            FileReader fr = new FileReader(FOLDER + name);            
+            FileReader fr = new FileReader(FOLDER + fileName);            
             JsonElement datos = parser.parse(fr);
             this.building = gson.fromJson(datos.toString(), BuildingScheme.class);
         } catch (FileNotFoundException ex) {

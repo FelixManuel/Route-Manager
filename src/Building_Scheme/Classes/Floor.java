@@ -34,7 +34,7 @@ public class Floor {
     }
 
     //Methods
-    public void createBuildingPlane(){
+    public void createFloorPlane(){
         this.plane.createPlane();
         
         for(Room room: this.rooms){

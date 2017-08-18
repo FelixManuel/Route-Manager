@@ -1,8 +1,8 @@
 package Building_Scheme.Classes;
 
-import Building_Scheme.Utilities.Coordinate;
+import Utilities.Coordinate;
 import Building_Scheme.Utilities.Dimension;
-import Building_Scheme.Utilities.Point2D;
+import Utilities.Point2D;
 import java.util.ArrayList;
 
 /**

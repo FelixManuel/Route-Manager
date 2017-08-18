@@ -1,4 +1,4 @@
-package Building_Scheme.Utilities;
+package Utilities;
 
 /**
  * @author Felix Manuel Mellado

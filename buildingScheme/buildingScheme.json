@@ -1,16 +1,16 @@
 {
-  "name": "building_1",
+  "name": "Households",
   "floors":[
-    { "name": "floor_1",
-      "plane": { "rows": 30, "columns": 30 },
+    { "name": "Floor_1",
+      "plane": { "rows": 36, "columns": 20 },
       "elevators":[
-			     { "name": "elevator_1",
+			     { "name": "elevator",
              "coordinate": { "coordinate": [
-                {"x": 10, "y": 10},
-							  {"x": 11, "y": 11}
+                {"x": 0, "y": 0},
+							  {"x": 0, "y": 0}
               ]},
 			       "floors":[
-               "floor_1"
+               "Floor_1", "Floor_2", "Floor_3", "Floor_4"
 					    ]}
 			 ],
 			"rooms":[
@@ -80,6 +80,86 @@
             {"x": 6, "y": 0}
             ]}
         }]
-     }
+     },
+     { "name": "floor_1",
+       "plane": { "rows": 30, "columns": 30 },
+       "elevators":[
+ 			     { "name": "elevator_1",
+              "coordinate": { "coordinate": [
+                 {"x": 10, "y": 10},
+ 							  {"x": 11, "y": 11}
+               ]},
+ 			       "floors":[
+                "floor_1"
+ 					    ]}
+ 			 ],
+ 			"rooms":[
+ 				{ "name": "room_1",
+ 					"coordinate": { "coordinate": [
+ 					      {"x": 0, "y": 0},
+ 								{"x": 4, "y": 4}
+ 					 ]},
+ 					"windows":[
+ 						{ "name": "window_1",
+ 							"coordinate":{ "coordinate": [
+ 							  {"x": 2, "y": 0},
+ 							  {"x": 3, "y": 0}
+               ]}
+             }],
+ 					"doors":[
+ 						{	"name": "door_1",
+ 							"coordinate":{ "coordinate": [
+ 							  {"x": 2, "y": 4},
+ 								{"x": 3, "y": 4}
+                ]}
+ 					 }]
+         },
+         { "name": "room_2",
+           "coordinate": { "coordinate": [
+                 {"x": 0, "y": 7},
+                 {"x": 4, "y": 12}
+            ]},
+           "windows":[
+             { "name": "window_1",
+               "coordinate":{ "coordinate": [
+                 {"x": 0, "y": 9},
+                 {"x": 0, "y": 10}
+               ]}
+             }],
+           "doors":[
+             {	"name": "door_1",
+               "coordinate":{ "coordinate": [
+                 {"x": 2, "y": 7},
+                 {"x": 3, "y": 7}
+                ]}
+            }]
+         }],
+ 			"stairs":[
+ 				{	"name": "stairs_1",
+ 					"coordinate":{ "coordinate": [
+ 					      {"x": 15, "y": 15},
+ 					      {"x": 16, "y": 17}
+ 					 ]},
+ 					"floors":[
+             "floor_1", "floor_2"
+ 					]}
+ 			 ],
+       "doors":[
+         { "name": "door_1",
+           "coordinate":{ "coordinate": [
+             {"x": 0, "y": 5 },
+             {"x": 0, "y": 6 }
+             ]},
+           "floors":[
+           ]}
+        ],
+       "windows":[
+         { "name": "window_1",
+           "coordinate":{ "coordinate": [
+             {"x": 5, "y": 0},
+             {"x": 6, "y": 0}
+             ]}
+         }]
+      }
 	]
 }

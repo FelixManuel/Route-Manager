@@ -14,6 +14,7 @@ public class Dimension {
     
     //Letter Attribute
     private static final String REPRESENTATIVE_LETTER = "W";
+    private static final String EMPTY_LETTER = " ";
     
     //Constructor
     public Dimension(){
@@ -36,7 +37,24 @@ public class Dimension {
         this.fillInThePlane();
     }
     
+    public void createTemperaturePlane(){
+        this.plane = new String[rows][columns];
+        this.fillInTheTemperaturePlane();
+    }
+    
     private void fillInThePlane(){
+        for (int row = 0; row < this.plane.length; row++) {
+            for (int column = 0; column < this.plane[row].length; column++) {
+                if(row == 0 || column == 0 || row == this.plane.length-1 || column == this.plane[row].length-1){
+                    this.setValue(row, column, REPRESENTATIVE_LETTER);
+                }else{
+                    this.setValue(row, column, EMPTY_LETTER);
+                }
+            }
+        }
+    }
+    
+    private void fillInTheTemperaturePlane(){
         for(int row = 0; row < this.plane.length; row++) {
             for (int column = 0; column < this.plane[row].length; column++) {
                 if(row == 0 || column == 0 || row == this.plane.length-1 || column == this.plane[row].length-1){
@@ -50,6 +68,20 @@ public class Dimension {
     
     @Override
     public String toString(){
+        String representationPlane = "";
+        
+        for (int row = 0; row < this.plane.length; row++) {
+            for (int column = 0; column < this.plane[row].length; column++) {
+                representationPlane += this.getValue(row, column) + " ";
+            }
+            
+            representationPlane += "\n";
+        }
+        
+        return representationPlane;
+    }
+    
+    public String toStringTemperaturePlane(){
         final String COLOR_BLUE = "\u001B[34m";
         final String COLOR_BLACK = "\u001B[30m";
         
