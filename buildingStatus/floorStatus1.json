@@ -1,0 +1,9 @@
+{
+    "name": "floor_1",
+    "rooms": [
+        {"name": "room_1",
+         "temperature": 26},
+        {"name": "room_2",
+         "temperature": 45}
+    ]
+}

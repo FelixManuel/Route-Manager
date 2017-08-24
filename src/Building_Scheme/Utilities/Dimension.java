@@ -27,6 +27,15 @@ public class Dimension {
         return this.plane[row][column];
     }
     
+    private int getRows(){
+        return this.rows;
+    }
+    
+    private int getColumns(){
+        return this.columns;
+    }
+    
+    //Setter Methods
     public void setValue(int row, int column, String value){
         this.plane[row][column] = value;
     }
@@ -108,6 +117,11 @@ public class Dimension {
         }catch(NumberFormatException nfe){
             return false;
         }
+    }
+    
+    public void clone(Dimension plane){
+        this.rows = plane.getRows();
+        this.columns = plane.getColumns();
     }
 
 }

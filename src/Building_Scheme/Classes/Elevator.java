@@ -1,7 +1,7 @@
 
 package Building_Scheme.Classes;
 
-import Utilities.Coordinate;
+import Building_Scheme.Utilities.CoordinateElementBuilding;
 import Building_Scheme.Utilities.Dimension;
 import Utilities.Point2D;
 import java.util.ArrayList;
@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class Elevator {
     //Attributes
     private String name;
-    private Coordinate coordinate;
+    private CoordinateElementBuilding coordinate;
     private ArrayList<String> floors;
     private static int elevatorNumber;
     
@@ -22,12 +22,12 @@ public class Elevator {
     //Constructor
     public Elevator(){
         this.name = "Elevator_" + elevatorNumber++;
-        this.coordinate = new Coordinate();
+        this.coordinate = new CoordinateElementBuilding();
         this.floors = new ArrayList<>();
     }
     
     //Getter Methods
-    private Coordinate getCoordinate(){
+    private CoordinateElementBuilding getCoordinate(){
         return this.coordinate;
     }
     

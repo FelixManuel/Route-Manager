@@ -1,7 +1,9 @@
 package Building_Scheme;
 
 import Building_Scheme.Classes.Floor;
+import Building_Status.FloorStatus;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * @author Felix Manuel Mellado
@@ -9,24 +11,25 @@ import java.util.ArrayList;
 public class BuildingScheme {
     //Attributes
     private String name;
-    private ArrayList<Floor> floors;
+    private HashMap<String,Floor> floors;
     private static int buildingSchemeNumber;
     
     //Constructor
     public BuildingScheme(){
         this.name = "Building_" + buildingSchemeNumber++;
-        this.floors = new ArrayList<>();
-    }
-    
-    //Getter Methods
-    public ArrayList<Floor> getFloors(){
-        return this.floors;
+        //this.floors = new ArrayList<>();
     }
 
     //Methods
     public void buildFloors(){
-        for(Floor floor: this.floors){
+        for(Floor floor: this.floors.values()){
             floor.createFloorPlane();
+        }
+    }
+    
+    public void updateFloors(FloorStatus floor){
+        if(floors.containsKey(floor.getName())){
+            floors.get(floor.getName()).createFloorTemperaturePlane(floor.getRooms());
         }
     }
 }

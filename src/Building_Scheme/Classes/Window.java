@@ -1,6 +1,6 @@
 package Building_Scheme.Classes;
 
-import Utilities.Coordinate;
+import Building_Scheme.Utilities.CoordinateElementBuilding;
 import Building_Scheme.Utilities.Dimension;
 import Utilities.Point2D;
 
@@ -10,7 +10,7 @@ import Utilities.Point2D;
 public class Window {
     //Attributes
     private String name;
-    private Coordinate coordinate;
+    private CoordinateElementBuilding coordinate;
     private static int windowNumber;
     
     //Letter Attribute
@@ -19,11 +19,11 @@ public class Window {
     //Constructor
     public Window(){
         this.name = "Window_" + windowNumber;
-        this.coordinate = new Coordinate();
+        this.coordinate = new CoordinateElementBuilding();
     }
     
     //Getter Methods
-    private Coordinate getCoordinate(){
+    private CoordinateElementBuilding getCoordinate(){
         return this.coordinate;
     }
     
