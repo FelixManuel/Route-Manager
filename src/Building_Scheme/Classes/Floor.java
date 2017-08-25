@@ -12,22 +12,11 @@ public class Floor {
     //Attributes
     private Dimension plane;
     private HashMap<String,Dimension> planes;
-    private ArrayList<Room> rooms;
-    private ArrayList<Elevator> elevators;
-    private ArrayList<Stairs> stairs;
-    private ArrayList<Door> doors;
-    private ArrayList<Window> windows;
-    
-    //Constructor
-    public Floor(){
-        this.plane = new Dimension();
-        this.planes = new HashMap<>();
-        this.rooms = new ArrayList<>();
-        this.elevators = new ArrayList<>();
-        this.stairs = new ArrayList<>();
-        this.doors = new ArrayList<>();
-        this.windows = new ArrayList<>();
-    }
+    private HashMap<String,Room> rooms;
+    private HashMap<String,Elevator> elevators;
+    private HashMap<String,Stairs> stairs;
+    private HashMap<String,Door> doors;
+    private HashMap<String,Window> windows;
     
     //Getter Methods    
     public Dimension getPlane(){
@@ -37,39 +26,38 @@ public class Floor {
     //Methods
     public void createFloorPlane(){
         this.plane.createPlane();
+        createFloorElements(this.plane);
+    }
+    
+    public void createTemperatureFloorPlane(){
+        Dimension temperaturePlane = new Dimension();
         
-        for(Room room: this.rooms){
-            room.createRoom(this.plane);
+        temperaturePlane.clone(this.plane);
+        temperaturePlane.createTemperaturePlane();        
+        createFloorElements(temperaturePlane);
+        
+        this.planes.put("Temperature", temperaturePlane);
+    }
+    
+    private void createFloorElements(Dimension plane){        
+        for(Room room: this.rooms.values()){
+            room.createRoom(plane);
         }
         
-        for (Elevator elevator: this.elevators){
-            elevator.createElevator(this.plane);
+        for (Elevator elevator: this.elevators.values()){
+            elevator.createElevator(plane);
         }
         
-        for (Stairs stairs: this.stairs){
-            stairs.createStairs(this.plane);
+        for (Stairs stairs: this.stairs.values()){
+            stairs.createStairs(plane);
         }
         
-        for (Door door: this.doors){
+        for (Door door: this.doors.values()){
             door.createDoor(plane);
         }
         
-        for (Window windows: this.windows){
+        for (Window windows: this.windows.values()){
             windows.createWindow(plane);
-        }
-    }
-    
-    public void createFloorTemperaturePlane(ArrayList<RoomStatus> rooms){
-        if(!this.planes.containsKey("TEMPERATURE")){
-            Dimension temperaturePlane = new Dimension();
-            temperaturePlane.clone(this.plane);
-            
-            temperaturePlane.createPlane();
-            for(Room room: this.rooms){
-                room.roomStatus();
-            }
-            
-            this.planes.put("TEMPERATURE", temperaturePlane);
         }
     }
 }

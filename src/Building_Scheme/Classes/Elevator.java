@@ -4,27 +4,18 @@ package Building_Scheme.Classes;
 import Building_Scheme.Utilities.CoordinateElementBuilding;
 import Building_Scheme.Utilities.Dimension;
 import Utilities.Point2D;
-import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * @author Felix Manuel Mellado
  */
 public class Elevator {
     //Attributes
-    private String name;
     private CoordinateElementBuilding coordinate;
-    private ArrayList<String> floors;
-    private static int elevatorNumber;
+    private HashMap<String,Boolean> floors;
     
     //Letter Attribute
     private static final String REPRESENTATIVE_LETTER = "E";
-    
-    //Constructor
-    public Elevator(){
-        this.name = "Elevator_" + elevatorNumber++;
-        this.coordinate = new CoordinateElementBuilding();
-        this.floors = new ArrayList<>();
-    }
     
     //Getter Methods
     private CoordinateElementBuilding getCoordinate(){

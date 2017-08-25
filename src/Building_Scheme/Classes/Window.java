@@ -9,16 +9,13 @@ import Utilities.Point2D;
  */
 public class Window {
     //Attributes
-    private String name;
     private CoordinateElementBuilding coordinate;
-    private static int windowNumber;
     
     //Letter Attribute
     private static final String REPRESENTATIVE_LETTER = "w";
     
     //Constructor
     public Window(){
-        this.name = "Window_" + windowNumber;
         this.coordinate = new CoordinateElementBuilding();
     }
     

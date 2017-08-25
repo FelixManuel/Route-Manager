@@ -9,16 +9,13 @@ import Utilities.Point2D;
  */
 public class Door {
     //Attributes
-    private String name;
     private CoordinateElementBuilding coordinate;
-    private static int doorNumber;
     
     //Letter Attribute
     private static final String REPRESENTATIVE_LETTER = "D";
     
     //Constructor
     public Door(){
-        this.name = "Door_" + doorNumber;
         this.coordinate = new CoordinateElementBuilding();
     }
     

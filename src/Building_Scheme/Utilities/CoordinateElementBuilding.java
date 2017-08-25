@@ -1,7 +1,6 @@
 package Building_Scheme.Utilities;
 
 import Utilities.Point2D;
-import java.util.ArrayList;
 
 /**
  * @author Felix Manuel Mellado

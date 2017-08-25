@@ -3,27 +3,18 @@ package Building_Scheme.Classes;
 import Building_Scheme.Utilities.CoordinateElementBuilding;
 import Building_Scheme.Utilities.Dimension;
 import Utilities.Point2D;
-import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * @author Felix Manuel Mellado
  */
 public class Stairs {
     //Attributes
-    private String name;
     private CoordinateElementBuilding coordinate;
-    private ArrayList<String> floors;
-    private static int stairsNumber;
+    private HashMap<String,Boolean> floors;
     
     //Letter Attributes
     private static final String REPRESENTATIVE_LETTER = "S";
-    
-    //Constructor
-    public Stairs(){
-        this.name = "Stairs_" + stairsNumber++;
-        this.coordinate = new CoordinateElementBuilding();
-        this.floors = new ArrayList<>();
-    }
     
     //Getter Methods
     private CoordinateElementBuilding getCoordinate(){

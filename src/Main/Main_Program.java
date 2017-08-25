@@ -3,7 +3,6 @@ package Main;
 import Agent_Scheme.AgentScheme;
 import Agent_Scheme.Utilities.CoordinateAgent;
 import Building_Scheme.BuildingScheme;
-import Building_Scheme.Classes.Floor;
 import Building_Status.FloorStatus;
 import File.FileInformation;
 import java.io.File;

@@ -3,29 +3,19 @@ package Building_Scheme.Classes;
 import Building_Scheme.Utilities.CoordinateElementBuilding;
 import Building_Scheme.Utilities.Dimension;
 import Utilities.Point2D;
-import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * @author Felix Manuel Mellado
  */
 public class Room {
     //Attributes
-    private String name;
     private CoordinateElementBuilding coordinate;
-    private ArrayList<Door> doors;
-    private ArrayList<Window> windows;
-    private static int roomNumber;
+    private HashMap<String,Door> doors;
+    private HashMap<String,Window> windows;
     
     //Letter Attribute
     private static final String REPRESENTATIVE_LETTER = "W";
-    
-    //Constructor
-    public Room(){
-        this.name = "Room_" + roomNumber++;
-        this.coordinate = new CoordinateElementBuilding();
-        this.doors = new ArrayList<>();
-        this.windows = new ArrayList<>();
-    }
     
     //Getter Methods
     private CoordinateElementBuilding getCoordinate(){
@@ -50,11 +40,11 @@ public class Room {
             plane.setValue(finalPoint.getX(), i, REPRESENTATIVE_LETTER);
         }
         
-        for(Door door: this.doors){
+        for(Door door: this.doors.values()){
             door.createDoor(plane);
         }
         
-        for(Window window: this.windows){
+        for(Window window: this.windows.values()){
             window.createWindow(plane);
         }
     }
