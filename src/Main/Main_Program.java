@@ -25,8 +25,14 @@ public class Main_Program {
         this.agents = new HashMap<>();
         
         this.building.buildFloors();
+        
+        this.building.print();
+        System.out.println("--------------------");
+        
         loadingAgents();
         loadingBuildingStatus();
+        
+        this.building.print();
     }
     
     //Methods
@@ -48,7 +54,7 @@ public class Main_Program {
         
         for(File file: listOfFloorStatus){
             floorStatus = FileInformation.extractFloorStatusInformation(file.getName());
-            this.building.updateFloors(floorStatus);
+            this.building.updateTemperatureFloors(floorStatus);
         }
     }
     

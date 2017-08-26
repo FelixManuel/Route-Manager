@@ -23,7 +23,7 @@ public class Dimension {
     }
     
     //Getter Methods
-    private String getValue(int row, int column){
+    public String getValue(int row, int column){
         return this.plane[row][column];
     }
     

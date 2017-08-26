@@ -1,9 +1,9 @@
 {
-    "name": "floor_1",
+    "name": "floor_0",
     "rooms": [
-        {"name": "room_1",
-         "temperature": 26},
-        {"name": "room_2",
-         "temperature": 45}
+        {"name": "kitchen",
+         "temperature": 50},
+        {"name": "living_room",
+         "temperature": 28}
     ]
 }

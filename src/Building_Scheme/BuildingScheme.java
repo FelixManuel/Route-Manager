@@ -20,9 +20,15 @@ public class BuildingScheme {
         }
     }
     
-    public void updateFloors(FloorStatus floor){
+    public void updateTemperatureFloors(FloorStatus floor){
         if(floors.containsKey(floor.getName())){
-            
+            this.floors.get(floor.getName()).floorTemperatureStatus(floor.getRooms());
+        }
+    }
+    
+    public void print(){
+        for(Floor floor: this.floors.values()){
+            floor.print();            
         }
     }
 }

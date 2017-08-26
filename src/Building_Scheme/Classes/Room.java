@@ -49,7 +49,25 @@ public class Room {
         }
     }
     
-    public void roomStatus(){
+    public void roomStatus(Dimension plane, Integer temperature){
+        Point2D startingPoint = this.coordinate.getCoordinate()[0];
+        Point2D finalPoint = this.coordinate.getCoordinate()[1];
+        
+        for (int i = startingPoint.getX(); i < finalPoint.getX(); i++) {
+            for (int j = startingPoint.getY(); j < finalPoint.getY(); j++) {
+                if(isNumeric(plane.getValue(i, j))){
+                    plane.setValue(i, j, temperature.toString());
+                }
+            }
+        }
+    }
     
+    private static boolean isNumeric(String string){
+        try{
+            Integer.parseInt(string);
+            return true;
+        }catch(NumberFormatException nfe){
+            return false;
+        }
     }
 }

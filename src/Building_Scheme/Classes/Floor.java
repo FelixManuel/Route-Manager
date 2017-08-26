@@ -60,4 +60,17 @@ public class Floor {
             windows.createWindow(plane);
         }
     }
+    
+    public void floorTemperatureStatus(ArrayList<RoomStatus> rooms){
+        for(RoomStatus room: rooms){
+            if(this.rooms.containsKey(room.getName())){
+                this.rooms.get(room.getName()).roomStatus(this.planes.get("Temperature"),room.getTemperature());
+            }
+        }
+    }
+    
+    public void print(){
+        System.out.println(this.plane.toString());
+        System.out.println(this.planes.get("Temperature").toStringTemperaturePlane());
+    }
 }
