@@ -26,17 +26,22 @@ public class Stairs {
         Point2D startingPoint = this.coordinate.getCoordinate()[0];
         Point2D finalPoint = this.coordinate.getCoordinate()[1];
         
-        plane.setValue(startingPoint.getX(), startingPoint.getY(), REPRESENTATIVE_LETTER);
-        plane.setValue(finalPoint.getX(), finalPoint.getY(), REPRESENTATIVE_LETTER);
+        int startingPointX = startingPoint.getX();
+        int startingPointY = startingPoint.getY();
+        int finalPointX = finalPoint.getX();
+        int finalPointY = finalPoint.getY();
         
-        for (int i = startingPoint.getX(); i < finalPoint.getX(); i++) {
-            plane.setValue(i, startingPoint.getY(), REPRESENTATIVE_LETTER);
-            plane.setValue(i, finalPoint.getY(), REPRESENTATIVE_LETTER);
+        plane.setValue(startingPointX, startingPointY, REPRESENTATIVE_LETTER);
+        plane.setValue(finalPointX, finalPointY, REPRESENTATIVE_LETTER);
+        
+        for (int i = startingPointX; i < finalPointX; i++) {
+            plane.setValue(i, startingPointY, REPRESENTATIVE_LETTER);
+            plane.setValue(i, finalPointY, REPRESENTATIVE_LETTER);
         }
         
-        for (int i = startingPoint.getY(); i < finalPoint.getY(); i++) {
-            plane.setValue(startingPoint.getX(), i, REPRESENTATIVE_LETTER);
-            plane.setValue(finalPoint.getX(), i, REPRESENTATIVE_LETTER);
+        for (int i = startingPointY; i < finalPointY; i++) {
+            plane.setValue(startingPointX, i, REPRESENTATIVE_LETTER);
+            plane.setValue(finalPointX, i, REPRESENTATIVE_LETTER);
         }
     }
 }

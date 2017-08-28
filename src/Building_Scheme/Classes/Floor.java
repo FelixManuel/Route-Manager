@@ -63,12 +63,19 @@ public class Floor {
     
     public void floorTemperatureStatus(ArrayList<RoomStatus> rooms){
         for(RoomStatus room: rooms){
-            if(this.rooms.containsKey(room.getName())){
-                this.rooms.get(room.getName()).roomStatus(this.planes.get("Temperature"),room.getTemperature());
+            String roomName = room.getName();
+            
+            if(this.rooms.containsKey(roomName)){
+                Dimension temperaturePlane = this.planes.get("Temperature");
+                Integer roomTemperature = room.getTemperature();
+                
+                this.rooms.get(roomName).roomStatus(temperaturePlane,roomTemperature);
             }
         }
     }
     
+    /*ESTO SE ELIMINARÁ YA QUE NO SERÁ NECESARIO. ACTUALMENTE SE UTILIZA
+      PARA COMPROBAR QUE SE FORMAN BIEN LOS PLANOS.*/    
     public void print(){
         System.out.println(this.plane.toString());
         System.out.println(this.planes.get("Temperature").toStringTemperaturePlane());

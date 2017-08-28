@@ -2,6 +2,8 @@ package Building_Scheme;
 
 import Building_Scheme.Classes.Floor;
 import Building_Status.FloorStatus;
+import Building_Status.RoomStatus;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -21,11 +23,16 @@ public class BuildingScheme {
     }
     
     public void updateTemperatureFloors(FloorStatus floor){
-        if(floors.containsKey(floor.getName())){
-            this.floors.get(floor.getName()).floorTemperatureStatus(floor.getRooms());
+        String floorName = floor.getName();
+        ArrayList<RoomStatus> floorRooms= floor.getRooms();
+        
+        if(floors.containsKey(floorName)){
+            this.floors.get(floorName).floorTemperatureStatus(floorRooms);
         }
     }
     
+    /*ESTO SE ELIMINARÁ YA QUE NO SERÁ NECESARIO. ACTUALMENTE SE UTILIZA
+      PARA COMPROBAR QUE SE FORMAN BIEN LOS PLANOS.*/
     public void print(){
         for(Floor floor: this.floors.values()){
             floor.print();            

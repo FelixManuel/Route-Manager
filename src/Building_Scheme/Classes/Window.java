@@ -14,11 +14,6 @@ public class Window {
     //Letter Attribute
     private static final String REPRESENTATIVE_LETTER = "w";
     
-    //Constructor
-    public Window(){
-        this.coordinate = new CoordinateElementBuilding();
-    }
-    
     //Getter Methods
     private CoordinateElementBuilding getCoordinate(){
         return this.coordinate;
@@ -29,16 +24,21 @@ public class Window {
         Point2D startingPoint = this.coordinate.getCoordinate()[0];
         Point2D finalPoint = this.coordinate.getCoordinate()[1];
         
-        plane.setValue(startingPoint.getX(), startingPoint.getY(), REPRESENTATIVE_LETTER);
-        plane.setValue(finalPoint.getX(), finalPoint.getY(), REPRESENTATIVE_LETTER);
+        int startingPointX = startingPoint.getX();
+        int startingPointY = startingPoint.getY();
+        int finalPointX = finalPoint.getX();
+        int finalPointY = finalPoint.getY();
         
-        if(startingPoint.getX() == finalPoint.getX()){
-            for (int i = startingPoint.getY(); i <= finalPoint.getY(); i++) {
-                plane.setValue(startingPoint.getX(), i, REPRESENTATIVE_LETTER);
+        plane.setValue(startingPointX, startingPointY, REPRESENTATIVE_LETTER);
+        plane.setValue(finalPointX, finalPointY, REPRESENTATIVE_LETTER);
+        
+        if(startingPointX == finalPointX){
+            for (int i = startingPointY; i <= finalPointY; i++) {
+                plane.setValue(startingPointX, i, REPRESENTATIVE_LETTER);
             }
         }else{
-            for (int i = startingPoint.getX(); i < finalPoint.getX(); i++) {
-                plane.setValue(i, startingPoint.getY(), REPRESENTATIVE_LETTER);
+            for (int i = startingPointX; i < finalPointX; i++) {
+                plane.setValue(i, startingPointY, REPRESENTATIVE_LETTER);
             }
         }
     }
