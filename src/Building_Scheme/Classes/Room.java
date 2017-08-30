@@ -17,11 +17,6 @@ public class Room {
     //Letter Attribute
     private static final String REPRESENTATIVE_LETTER = "W";
     
-    //Getter Methods
-    private CoordinateElementBuilding getCoordinate(){
-        return this.coordinate;
-    }
-    
     //Methods
     public void createRoom(Dimension plane){
         Point2D startingPoint = this.coordinate.getCoordinate()[0];

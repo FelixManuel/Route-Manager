@@ -17,11 +17,6 @@ public class Elevator {
     //Letter Attribute
     private static final String REPRESENTATIVE_LETTER = "E";
     
-    //Getter Methods
-    private CoordinateElementBuilding getCoordinate(){
-        return this.coordinate;
-    }
-    
     //Methods
     public void createElevator(Dimension plane){
         Point2D startingPoint = this.coordinate.getCoordinate()[0];

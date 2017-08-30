@@ -16,12 +16,6 @@ public class Dimension {
     private static final String REPRESENTATIVE_LETTER = "W";
     private static final String EMPTY_LETTER = " ";
     
-    //Constructor
-    public Dimension(){
-        this.rows = 0;
-        this.columns = 0;
-    }
-    
     //Getter Methods
     public String getValue(int row, int column){
         return this.plane[row][column];

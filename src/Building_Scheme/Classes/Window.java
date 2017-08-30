@@ -14,11 +14,6 @@ public class Window {
     //Letter Attribute
     private static final String REPRESENTATIVE_LETTER = "w";
     
-    //Getter Methods
-    private CoordinateElementBuilding getCoordinate(){
-        return this.coordinate;
-    }
-    
     //Methods
     public void createWindow(Dimension plane){
         Point2D startingPoint = this.coordinate.getCoordinate()[0];

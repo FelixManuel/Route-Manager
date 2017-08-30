@@ -16,11 +16,6 @@ public class Stairs {
     //Letter Attributes
     private static final String REPRESENTATIVE_LETTER = "S";
     
-    //Getter Methods
-    private CoordinateElementBuilding getCoordinate(){
-        return this.coordinate;
-    }
-    
     //Methods
     public void createStairs(Dimension plane){
         Point2D startingPoint = this.coordinate.getCoordinate()[0];

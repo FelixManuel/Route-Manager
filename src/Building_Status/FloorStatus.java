@@ -10,12 +10,6 @@ public class FloorStatus {
     private String name;
     private ArrayList<RoomStatus> rooms;
     
-    //Constructor
-    public FloorStatus(){
-        this.name = "";
-        this.rooms = new ArrayList<>();
-    }
-    
     //Getter Methods
     public String getName(){
         return this.name;

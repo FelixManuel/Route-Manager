@@ -8,12 +8,6 @@ public class RoomStatus {
     private String name;
     private int temperature;
     
-    //Constructor
-    public RoomStatus(){
-        this.name = "";
-        this.temperature = 0;
-    }
-    
     //Getter Methods
     public String getName(){
         return this.name;
