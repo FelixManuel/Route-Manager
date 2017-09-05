@@ -15,6 +15,7 @@ public class Dimension {
     //Letter Attribute
     private static final String REPRESENTATIVE_LETTER = "W";
     private static final String EMPTY_LETTER = " ";
+    private static final String HALL_LETTER = "H";
     
     //Getter Methods
     public String getValue(int row, int column){
@@ -45,6 +46,11 @@ public class Dimension {
         this.fillInTheTemperaturePlane();
     }
     
+    public void createSchematicPlane(){
+        this.plane = new String[rows][columns];
+        this.fillInTheSchematicPlane();
+    }
+    
     private void fillInThePlane(){
         for (int row = 0; row < this.plane.length; row++) {
             for (int column = 0; column < this.plane[row].length; column++) {
@@ -64,6 +70,18 @@ public class Dimension {
                     this.setValue(row, column, REPRESENTATIVE_LETTER);
                 }else{
                     this.setValue(row, column, MEDIUM_TEMPERATURE);
+                }
+            }
+        }
+    }
+    
+    private void fillInTheSchematicPlane(){
+        for(int row = 0; row < this.plane.length; row++){
+            for(int column = 0; column < this.plane[row].length; column++){
+                if(row == 0 || column == 0 || row == this.plane.length-1 || column == this.plane[row].length-1){
+                    this.setValue(row, column, REPRESENTATIVE_LETTER);
+                }else{
+                    this.setValue(row, column, HALL_LETTER);
                 }
             }
         }

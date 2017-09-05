@@ -18,6 +18,10 @@ public class Floor {
     private HashMap<String,Door> doors;
     private HashMap<String,Window> windows;
     
+    //Names Planes
+    private static final String TEMPERATURE_PLANE = "Temperature";
+    private static final String SCHEMATIC_PLANE = "Schematic";
+    
     //Getter Methods    
     public Dimension getPlane(){
         return this.plane;
@@ -36,7 +40,24 @@ public class Floor {
         temperaturePlane.createTemperaturePlane();        
         createFloorElements(temperaturePlane);
         
-        this.planes.put("Temperature", temperaturePlane);
+        this.planes.put(TEMPERATURE_PLANE, temperaturePlane);
+    }
+    
+    public void createSchematicFloor(){
+        Dimension schematicPlane = new Dimension();
+        
+        schematicPlane.clone(this.plane);
+        schematicPlane.createSchematicPlane();
+        createFloorElements(schematicPlane);
+        cleanSchematicRooms(schematicPlane);
+        
+        this.planes.put(SCHEMATIC_PLANE, schematicPlane);
+    }
+    
+    private void cleanSchematicRooms(Dimension plane){
+        for(Room room: this.rooms.values()){
+            room.cleanRoom(plane);
+        }
     }
     
     private void createFloorElements(Dimension plane){        
@@ -62,14 +83,16 @@ public class Floor {
     }
     
     public void floorTemperatureStatus(ArrayList<RoomStatus> rooms){
+        Dimension temperaturePlane = this.planes.get(TEMPERATURE_PLANE);
+        Dimension schematicPlane = this.planes.get(SCHEMATIC_PLANE);
+        
         for(RoomStatus room: rooms){
             String roomName = room.getName();
             
             if(this.rooms.containsKey(roomName)){
-                Dimension temperaturePlane = this.planes.get("Temperature");
                 Integer roomTemperature = room.getTemperature();
                 
-                this.rooms.get(roomName).roomStatus(temperaturePlane,roomTemperature);
+                this.rooms.get(roomName).roomStatus(schematicPlane,temperaturePlane,roomTemperature);
             }
         }
     }
@@ -79,5 +102,6 @@ public class Floor {
     public void print(){
         System.out.println(this.plane.toString());
         System.out.println(this.planes.get("Temperature").toStringTemperaturePlane());
+        System.out.println(this.planes.get("Schematic").toString());
     }
 }

@@ -19,6 +19,7 @@ public class BuildingScheme {
         for(Floor floor: this.floors.values()){
             floor.createFloorPlane();            
             floor.createTemperatureFloorPlane();
+            floor.createSchematicFloor();
         }
     }
     

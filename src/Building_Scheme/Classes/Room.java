@@ -16,6 +16,8 @@ public class Room {
     
     //Letter Attribute
     private static final String REPRESENTATIVE_LETTER = "W";
+    private static final String HALL_LETTER = "H";
+    private static final String EMPTY_LETTER = " ";
     
     //Methods
     public void createRoom(Dimension plane){
@@ -49,7 +51,7 @@ public class Room {
         }
     }
     
-    public void roomStatus(Dimension plane, Integer temperature){
+    public void roomStatus(Dimension schematicPlane, Dimension TemperaturePlane, Integer temperature){
         Point2D startingPoint = this.coordinate.getCoordinate()[0];
         Point2D finalPoint = this.coordinate.getCoordinate()[1];
         
@@ -60,8 +62,28 @@ public class Room {
         
         for (int i = startingPointX; i < finalPointX; i++) {
             for (int j = startingPointY; j < finalPointY; j++) {
-                if(isNumeric(plane.getValue(i, j))){
-                    plane.setValue(i, j, temperature.toString());
+                if(isNumeric(TemperaturePlane.getValue(i, j))){
+                    TemperaturePlane.setValue(i, j, temperature.toString());
+                }
+            }
+        }
+        
+        //readjustHallTemperature
+    }
+    
+    public void cleanRoom(Dimension plane){
+        Point2D startingPoint = this.coordinate.getCoordinate()[0];
+        Point2D finalPoint = this.coordinate.getCoordinate()[1];
+        
+        int startingPointX = startingPoint.getX();
+        int startingPointY = startingPoint.getY();
+        int finalPointX = finalPoint.getX();
+        int finalPointY = finalPoint.getY();
+        
+        for (int i = startingPointX; i< finalPointX; i++){
+            for(int j = startingPointY; j < finalPointY; j++){
+                if(plane.getValue(i, j).equals(HALL_LETTER)){
+                    plane.setValue(i, j, EMPTY_LETTER);
                 }
             }
         }
