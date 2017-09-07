@@ -90,8 +90,7 @@ public class Floor {
             String roomName = room.getName();
             
             if(this.rooms.containsKey(roomName)){
-                Integer roomTemperature = room.getTemperature();
-                
+                Integer roomTemperature = room.getTemperature();                
                 this.rooms.get(roomName).roomStatus(schematicPlane,temperaturePlane,roomTemperature);
             }
         }

@@ -22,11 +22,11 @@ public class Dimension {
         return this.plane[row][column];
     }
     
-    private int getRows(){
+    public int getRows(){
         return this.rows;
     }
     
-    private int getColumns(){
+    public int getColumns(){
         return this.columns;
     }
     

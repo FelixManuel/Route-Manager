@@ -51,7 +51,7 @@ public class Room {
         }
     }
     
-    public void roomStatus(Dimension schematicPlane, Dimension TemperaturePlane, Integer temperature){
+    public void roomStatus(Dimension schematicPlane, Dimension temperaturePlane, Integer temperature){
         Point2D startingPoint = this.coordinate.getCoordinate()[0];
         Point2D finalPoint = this.coordinate.getCoordinate()[1];
         
@@ -62,13 +62,61 @@ public class Room {
         
         for (int i = startingPointX; i < finalPointX; i++) {
             for (int j = startingPointY; j < finalPointY; j++) {
-                if(isNumeric(TemperaturePlane.getValue(i, j))){
-                    TemperaturePlane.setValue(i, j, temperature.toString());
+                if(isNumeric(temperaturePlane.getValue(i, j))){
+                    temperaturePlane.setValue(i, j, temperature.toString());
                 }
             }
         }
         
-        //readjustHallTemperature
+        readjustHallTemperature(schematicPlane, temperaturePlane, temperature);
+    }
+    
+    private void readjustHallTemperature(Dimension schematicPlane, Dimension temperaturePlane, Integer temperature){
+        Point2D startingPoint = this.coordinate.getCoordinate()[0];
+        Point2D finalPoint = this.coordinate.getCoordinate()[1];
+        
+        int startingPointX = startingPoint.getX();
+        int startingPointY = startingPoint.getY();
+        int finalPointX = finalPoint.getX();
+        int finalPointY = finalPoint.getY();
+        
+        for(int i = startingPointY; i<=finalPointY; i++){
+            if(startingPointX-1 >= 0){
+                String value = schematicPlane.getValue(startingPointX-1, i);
+                if(value.equals(HALL_LETTER)){
+                    Integer planeTemperature = Integer.parseInt(temperaturePlane.getValue(startingPointX-1, i));
+                    Integer newTemperature = (temperature+planeTemperature)/2;
+                    temperaturePlane.setValue(startingPointX-1, i, newTemperature.toString());
+                }
+            }
+            if(finalPointX+1 <= schematicPlane.getRows()-1){
+                String value = schematicPlane.getValue(finalPointX+1, i);
+                if(value.equals(HALL_LETTER)){
+                    Integer planeTemperature = Integer.parseInt(temperaturePlane.getValue(finalPointX+1, i));
+                    Integer newTemperature = (temperature+planeTemperature)/2;
+                    temperaturePlane.setValue(finalPointX+1, i, newTemperature.toString());
+                }
+            }
+        }
+        
+        for(int i = startingPointX; i<=finalPointX; i++){
+            if(startingPointY-1 >= 0){
+                String value = schematicPlane.getValue(i, startingPointY-1);
+                if(value.equals(HALL_LETTER)){
+                    Integer planeTemperature = Integer.parseInt(temperaturePlane.getValue(i, startingPointY-1));
+                    Integer newTemperature = (temperature+planeTemperature)/2;
+                    temperaturePlane.setValue(i, startingPointY-1, newTemperature.toString());
+                }
+            }
+            if(finalPointY+1 <= schematicPlane.getColumns()-1){
+                String value = schematicPlane.getValue(i, finalPointY+1);
+                if(value.equals(HALL_LETTER)){
+                    Integer planeTemperature = Integer.parseInt(temperaturePlane.getValue(i, finalPointY+1));
+                    Integer newTemperature = (temperature+planeTemperature)/2;
+                    temperaturePlane.setValue(i, finalPointY+1, newTemperature.toString());
+                }
+            }
+        }
     }
     
     public void cleanRoom(Dimension plane){
