@@ -14,6 +14,11 @@ public class Door {
     //Letter Attribute
     private static final String REPRESENTATIVE_LETTER = "D";
     
+    //Getter Methods
+    public CoordinateElementBuilding getCoordinate(){
+        return this.coordinate;
+    }
+    
     //Methods
     public void createDoor(Dimension plane){
         Point2D startingPoint = this.coordinate.getCoordinate()[0];

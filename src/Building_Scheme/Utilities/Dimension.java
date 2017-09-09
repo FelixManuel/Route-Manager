@@ -17,6 +17,15 @@ public class Dimension {
     private static final String EMPTY_LETTER = " ";
     private static final String HALL_LETTER = "H";
     
+    //Constructor
+    public Dimension(){}
+    
+    public Dimension(int rows, int columns){
+        this.rows = rows;
+        this.columns = columns;
+        this.plane = new String[rows][columns];
+    }
+    
     //Getter Methods
     public String getValue(int row, int column){
         return this.plane[row][column];
@@ -131,9 +140,23 @@ public class Dimension {
         }
     }
     
-    public void clone(Dimension plane){
+    public void cloneRowsColumns(Dimension plane){
         this.rows = plane.getRows();
         this.columns = plane.getColumns();
+    }
+    
+    @Override
+    public Object clone(){
+        Dimension newPlane = new Dimension(this.rows, this.columns);
+        
+        for(int row = 0; row<this.rows-1; row++){
+            for(int column = 0; column<this.columns-1; column++){
+                String value = this.getValue(row, column);
+                newPlane.setValue(row, column, value);
+            }
+        }
+        
+        return newPlane;
     }
 
 }

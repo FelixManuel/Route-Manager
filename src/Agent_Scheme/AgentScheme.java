@@ -1,6 +1,7 @@
 package Agent_Scheme;
 
 import Agent_Scheme.Utilities.CoordinateAgent;
+import java.util.ArrayList;
 
 /**
  * @author Felix Manuel Mellado

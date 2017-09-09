@@ -26,6 +26,10 @@ public class Floor {
     public Dimension getPlane(){
         return this.plane;
     }
+    
+    public Dimension getTemperaturePlane(){
+        return this.planes.get(TEMPERATURE_PLANE);
+    }
 
     //Methods
     public void createFloorPlane(){
@@ -36,7 +40,7 @@ public class Floor {
     public void createTemperatureFloorPlane(){
         Dimension temperaturePlane = new Dimension();
         
-        temperaturePlane.clone(this.plane);
+        temperaturePlane.cloneRowsColumns(this.plane);
         temperaturePlane.createTemperaturePlane();        
         createFloorElements(temperaturePlane);
         
@@ -46,7 +50,7 @@ public class Floor {
     public void createSchematicFloor(){
         Dimension schematicPlane = new Dimension();
         
-        schematicPlane.clone(this.plane);
+        schematicPlane.cloneRowsColumns(this.plane);
         schematicPlane.createSchematicPlane();
         createFloorElements(schematicPlane);
         cleanSchematicRooms(schematicPlane);

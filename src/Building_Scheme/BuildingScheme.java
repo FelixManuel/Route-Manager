@@ -13,6 +13,18 @@ public class BuildingScheme {
     //Attributes
     private String name;
     private HashMap<String,Floor> floors;
+    
+    //Obligatory Attribute
+    private static String FIRST_FLOOR = "floor_0";
+    
+    //GetterMethods
+    public Floor getFirstFloor(){
+        return this.floors.get(FIRST_FLOOR);
+    }
+    
+    public HashMap<String, Floor> getFloors(){
+        return this.floors;
+    }
 
     //Methods
     public void buildFloors(){

@@ -8,6 +8,12 @@ public class Point2D {
     private int x;
     private int y;
     
+    //Constructor
+    public Point2D(int x, int y){
+        this.x = x;
+        this.y = y;
+    }
+    
     //Getter Methods
     public int getX(){
         return this.x;
@@ -15,5 +21,10 @@ public class Point2D {
     
     public int getY(){
         return this.y;
+    }
+    
+    //Methods
+    public boolean equals(Point2D point){
+        return (this.getX() == point.getX() && this.getY() == point.getY());
     }
 }
