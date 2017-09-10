@@ -160,8 +160,9 @@ public class AgentRoute implements Comparable{
         solution.add(ColumnMore);
         
         ArrayList<Point2D> elementsToRemove = new ArrayList<>();
+        int solutionSize = solution.size();
         
-        for(int iterator = 0; iterator<solution.size(); iterator++){
+        for(int iterator = 0; iterator<solutionSize; iterator++){
             Point2D point = solution.get(iterator);
             if(!exist(point) || !isValid(point,floor) || goneThere(point)){
                 elementsToRemove.add(point);

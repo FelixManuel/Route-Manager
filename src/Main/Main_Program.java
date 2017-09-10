@@ -3,7 +3,6 @@ package Main;
 import Agent_Scheme.AgentScheme;
 import Agent_Scheme.Utilities.CoordinateAgent;
 import Building_Scheme.BuildingScheme;
-import Building_Scheme.Classes.Door;
 import Building_Scheme.Classes.Floor;
 import Building_Scheme.Utilities.Dimension;
 import Building_Status.FloorStatus;
@@ -91,28 +90,31 @@ public class Main_Program {
         Point2D exitPoint;
         Dimension plane = this.building.getFirstFloor().getPlane();
         
-        for(int column = 0; column<plane.getColumns()-1; column++){
+        int columns = plane.getColumns()-1;
+        int rows = plane.getRows()-1;
+        
+        for(int column = 0; column<columns; column++){
             String firsRowValue = plane.getValue(0, column);
-            String lastRowValue = plane.getValue(plane.getRows()-1, column);
+            String lastRowValue = plane.getValue(rows, column);
             if(firsRowValue.equals(DOOR_LETTER)){
                 exitPoint = new Point2D(0, column);
                 exits.add(exitPoint);
             }
             if(lastRowValue.equals(DOOR_LETTER)){
-                exitPoint = new Point2D(plane.getRows()-1, column);
+                exitPoint = new Point2D(rows, column);
                 exits.add(exitPoint);
             }
         }
         
-        for(int row = 0; row<plane.getRows()-1; row++){
+        for(int row = 0; row<rows; row++){
             String firstColumnValue = plane.getValue(row, 0);
-            String lastColumnValue = plane.getValue(row, plane.getColumns()-1);
+            String lastColumnValue = plane.getValue(row, columns);
             if(firstColumnValue.equals(DOOR_LETTER)){
                exitPoint = new Point2D(row, 0);
                exits.add(exitPoint);
             }
             if(lastColumnValue.equals(DOOR_LETTER)){
-               exitPoint = new Point2D(row, plane.getColumns()-1);
+               exitPoint = new Point2D(row, columns);
                exits.add(exitPoint);
             }
         }
