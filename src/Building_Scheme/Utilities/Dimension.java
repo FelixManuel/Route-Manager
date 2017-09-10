@@ -98,37 +98,36 @@ public class Dimension {
     
     @Override
     public String toString(){
-        String representationPlane = "";
+        StringBuilder representationPlane = new StringBuilder("");
         
         for (int row = 0; row < this.plane.length; row++) {
             for (int column = 0; column < this.plane[row].length; column++) {
-                representationPlane += this.getValue(row, column) + " ";
-            }
-            
-            representationPlane += "\n";
+                representationPlane.append(this.getValue(row, column) + " ");
+            }            
+            representationPlane.append("\n");
         }
         
-        return representationPlane;
+        return representationPlane.toString();
     }
     
     public String toStringTemperaturePlane(){
         final String COLOR_BLUE = "\u001B[34m";
         final String COLOR_BLACK = "\u001B[30m";
         
-        String representationPlane = "";
+        StringBuilder representationPlane = new StringBuilder("");
         
         for (int row = 0; row < this.plane.length; row++) {
             for (int column = 0; column < this.plane[row].length; column++){
                 if(Dimension.isNumeric(this.getValue(row, column))){
-                    representationPlane += COLOR_BLUE + this.getValue(row, column) + " ";
+                    representationPlane.append(COLOR_BLUE + this.getValue(row, column) + " ");// += COLOR_BLUE + this.getValue(row, column) + " ";
                 }else{
-                    representationPlane += COLOR_BLACK + this.getValue(row, column) + "  ";  
+                    representationPlane.append(COLOR_BLACK + this.getValue(row, column) + "  ");// += COLOR_BLACK + this.getValue(row, column) + "  ";  
                 }
             }
-            representationPlane += "\n";
+            representationPlane.append("\n");// += "\n";
         }
         
-        return representationPlane;
+        return representationPlane.toString();
     }
     
     private static boolean isNumeric(String string){
