@@ -9,6 +9,7 @@ import Building_Scheme.Utilities.Dimension;
 import Building_Status.FloorStatus;
 import File.FileInformation;
 import Route.AgentRoute;
+import Route.Route;
 import Utilities.Point2D;
 import java.io.File;
 import java.util.ArrayList;
@@ -79,6 +80,9 @@ public class Main_Program {
         for(AgentScheme agent: this.agents.values()){
             CoordinateAgent coordinateAgent = agent.getCoordinate();
             AgentRoute agentRoute = new AgentRoute(exits, temperaturePlanes, rows, columns, coordinateAgent);
+            ArrayList<CoordinateAgent> route = Route.generationRoute(agentRoute);
+            agent.setRoute(route);
+            FileInformation.saveAgentRoute(agent, "route_"+agent.getIdentification());
         }
     }
     

@@ -18,6 +18,7 @@ public class Room {
     private static final String REPRESENTATIVE_LETTER = "W";
     private static final String HALL_LETTER = "H";
     private static final String EMPTY_LETTER = " ";
+    private static final String DOOR_LETTER = "D";
     
     //Methods
     public void createRoom(Dimension plane){
@@ -60,9 +61,9 @@ public class Room {
         int finalPointX = finalPoint.getX();
         int finalPointY = finalPoint.getY();
         
-        for (int i = startingPointX; i < finalPointX; i++) {
-            for (int j = startingPointY; j < finalPointY; j++) {
-                if(isNumeric(temperaturePlane.getValue(i, j))){
+        for (int i = startingPointX; i <= finalPointX; i++) {
+            for (int j = startingPointY; j <= finalPointY; j++) {
+                if(isNumeric(temperaturePlane.getValue(i, j)) || temperaturePlane.getValue(i, j).equals(DOOR_LETTER)){
                     temperaturePlane.setValue(i, j, temperature.toString());
                 }
             }

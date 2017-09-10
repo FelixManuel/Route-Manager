@@ -23,6 +23,15 @@ public class Point2D {
         return this.y;
     }
     
+    //Setter Methods
+    public void setX(int x){
+        this.x = x;
+    }
+    
+    public void setY(int y){
+        this.y = y;
+    }
+    
     //Methods
     public boolean equals(Point2D point){
         return (this.getX() == point.getX() && this.getY() == point.getY());

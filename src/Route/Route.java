@@ -1,5 +1,7 @@
 package Route;
 
+import Agent_Scheme.Utilities.CoordinateAgent;
+import java.util.ArrayList;
 import java.util.PriorityQueue;
 
 /**
@@ -7,7 +9,7 @@ import java.util.PriorityQueue;
  */
 public class Route {
     
-    public static void generationRoute(AgentRoute agentRoute, String nameExitFile){
+    public static ArrayList<CoordinateAgent> generationRoute(AgentRoute agentRoute){
         PriorityQueue<AgentRoute> mound = new PriorityQueue<>();
         int quota = agentRoute.narrow();
         AgentRoute solution = null;
@@ -19,7 +21,16 @@ public class Route {
             if(partialSolution.isSolution()){
                 solution = (AgentRoute) partialSolution.clone();
                 quota = partialSolution.getConsumedPoints();
+            }else{
+                for(AgentRoute sonAgentRoute: partialSolution.complections()){
+                    int agentQuota = sonAgentRoute.getConsumedPoints();
+                    if(agentQuota < quota){
+                        mound.add(sonAgentRoute);
+                    }
+                }
             }
         }
+        
+        return solution.getRoute();
     }
 }

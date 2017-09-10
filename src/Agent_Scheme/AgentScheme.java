@@ -10,6 +10,7 @@ public class AgentScheme {
     //Attributes
     private CoordinateAgent coordinate;
     private int identification;
+    private ArrayList<CoordinateAgent> route;
     
     //Getter Method
     public int getIdentification(){
@@ -18,5 +19,10 @@ public class AgentScheme {
     
     public CoordinateAgent getCoordinate(){
         return this.coordinate;
+    }
+    
+    //Setter Methods
+    public void setRoute(ArrayList<CoordinateAgent> route){
+        this.route = route;
     }
 }

@@ -8,6 +8,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,6 +21,7 @@ public class FileInformation {
     private static final String BUILDING_FOLDER = "buildingScheme//";
     private static final String AGENT_FOLDER = "agentScheme//";
     private static final String BUILDINGSTATUS_FOLDER = "buildingStatus//";
+    private static final String ROUTE_FOLDER = "route//";
     
     //Methods
     public static BuildingScheme extractBuildingInformation(String fileName){
@@ -86,5 +88,18 @@ public class FileInformation {
         }
         
         return floorStatus;
+    }
+    
+    public static void saveAgentRoute(AgentScheme agent, String fileName){
+        FileWriter fw = null;
+        Gson gson = new Gson();
+        String agentScheme = gson.toJson(agent);
+        try {
+            fw = new FileWriter(ROUTE_FOLDER+fileName+".json");
+            fw.write(agentScheme);
+            fw.close();
+        } catch (IOException ex) {
+            Logger.getLogger(FileInformation.class.getName()).log(Level.SEVERE, null, ex);
+        }       
     }
 }

@@ -10,6 +10,12 @@ public class CoordinateAgent {
     private Point2D coordinate;
     private String floor;
     
+    //Constructor
+    public CoordinateAgent(Point2D coordinate, String floor){
+        this.coordinate = coordinate;
+        this.floor = floor;
+    }
+    
     //Getter Methods
     public Point2D getCoordinate(){
         return this.coordinate;

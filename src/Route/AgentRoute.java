@@ -23,6 +23,13 @@ public class AgentRoute implements Comparable{
     
     //Normative attribute
     private static final int MEDIUM_TEMPERATURE = 26;
+    private static final int DOOR_VALUE = 0;
+    
+    //Letter attribute
+    private static final String WALL_LETTER = "W";
+    private static final String WINDOW_LETTER = "w";
+    private static final String ELEVATOR_LETTER = "E";
+    private static final String STAIRS_LETTER = "S";
     
     //Constructor
     public AgentRoute(ArrayList<Point2D> exits, HashMap<String, Dimension> temperaturePlanes,
@@ -33,7 +40,7 @@ public class AgentRoute implements Comparable{
         this.temperaturePlanes = temperaturePlanes;
         this.rows = rows;
         this.columns = columns;
-                
+        
         this.route.add(coordinateAgent);
         this.consumedPoints = addConsumedPoint(this.route.get(this.route.size()-1));
     }
@@ -50,22 +57,37 @@ public class AgentRoute implements Comparable{
         this.columns = columns;
     }
     
-    //Get Methods
+    //Getter Methods
+    public ArrayList<CoordinateAgent> getRoute(){
+        return this.route;
+    }
+    
     public int getConsumedPoints(){
         return this.consumedPoints;
     }
     
-    //Methods
+    private int getMovements(){
+        return this.movements;
+    }
+    
+    //Setter Methods
+    private void setConsumedPoints(int consumedPoints){
+        this.consumedPoints = consumedPoints;
+    }
+    
+    private void setMovements(int movements){
+        this.movements = movements;
+    }
+    
+    //Methods    
     public int narrow(){
         int size = temperaturePlanes.size();
+        int rows = this.rows;
+        int columns = this.columns;
         
-        if(this.rows > 1){
-            this.rows -= this.movements; 
-        }else if(this.columns > 1){
-            this.columns -= this.movements;
-        }
+        int total = rows + columns - this.movements;
         
-        return (this.rows * this.columns * size * MEDIUM_TEMPERATURE);
+        return (total * size * MEDIUM_TEMPERATURE);
     }
     
     public boolean isSolution(){
@@ -74,7 +96,7 @@ public class AgentRoute implements Comparable{
         Iterator iterator = this.exits.iterator();
         
         while(solution == false && iterator.hasNext()){
-            if(agentPosition.equals(iterator.next())){
+            if(agentPosition.equals((Point2D)iterator.next())){
                 solution = true;
             }
         }
@@ -86,8 +108,123 @@ public class AgentRoute implements Comparable{
         int rowAgent = coordinateAgent.getCoordinate().getX();
         int columnAgent = coordinateAgent.getCoordinate().getY();
         Dimension temperaturePlane = this.temperaturePlanes.get(coordinateAgent.getFloor());
+        String value = temperaturePlane.getValue(rowAgent, columnAgent);
         
-        return Integer.parseInt(temperaturePlane.getValue(rowAgent, columnAgent));
+        if(isNumeric(value)){
+            return Integer.parseInt(value);
+        }else{
+            return DOOR_VALUE;
+        }
+    }
+    
+    private void addCoordinateAgentInRoute(CoordinateAgent corrdianteAgent){
+        this.route.add(corrdianteAgent);
+    }
+    
+    public ArrayList<AgentRoute> complections(){
+        ArrayList<AgentRoute> complections = new ArrayList<>();
+        
+        CoordinateAgent agent = this.route.get(this.route.size()-1);
+        ArrayList<Point2D> newPositions = generatePoints(agent);
+        for(Point2D point: newPositions){
+            AgentRoute newAgent = (AgentRoute)this.clone();
+            
+            CoordinateAgent newCoordinate = new CoordinateAgent(point, agent.getFloor());
+            newAgent.addCoordinateAgentInRoute(newCoordinate);
+            
+            newAgent.setMovements(newAgent.getMovements()+1);
+            newAgent.setConsumedPoints(newAgent.getConsumedPoints()+newAgent.addConsumedPoint(newCoordinate));
+            
+            complections.add(newAgent);
+        }
+        
+        return complections;
+    }
+    
+    private ArrayList<Point2D> generatePoints(CoordinateAgent agent){
+        Point2D lastPosition = agent.getCoordinate();
+        String floor = agent.getFloor();
+        ArrayList<Point2D> solution = new ArrayList<>();
+        
+        int lastPositionX = lastPosition.getX();
+        int lastPositionY = lastPosition.getY();
+        
+        Point2D rowLess = new Point2D(lastPositionX-1, lastPositionY);
+        Point2D rowMore = new Point2D(lastPositionX+1, lastPositionY);
+        Point2D ColumnLess = new Point2D(lastPositionX, lastPositionY-1);
+        Point2D ColumnMore = new Point2D(lastPositionX, lastPositionY+1);
+        
+        solution.add(rowLess);
+        solution.add(rowMore);
+        solution.add(ColumnLess);
+        solution.add(ColumnMore);
+        
+        ArrayList<Point2D> elementsToRemove = new ArrayList<>();
+        
+        for(int iterator = 0; iterator<solution.size(); iterator++){
+            Point2D point = solution.get(iterator);
+            if(!exist(point) || !isValid(point,floor) || goneThere(point)){
+                elementsToRemove.add(point);
+            }
+        }
+        
+        for(Point2D point: elementsToRemove){
+            solution.remove(point);
+        }
+        
+        return solution;
+    }
+    
+    private boolean exist(Point2D point){
+        boolean exist = true;
+        int pointX = point.getX();
+        int pointY = point.getY();
+        
+        if(pointX < 0 || pointX >= this.rows || pointY < 0 || pointY >= this.columns){
+            exist = false;
+        }
+        
+        return exist;
+    }
+    
+    private boolean isValid(Point2D point, String floor){
+        boolean valid = true;
+        Dimension temperaturePlane = this.temperaturePlanes.get(floor);
+        int pointX = point.getX();
+        int pointY = point.getY();
+
+        String letter = temperaturePlane.getValue(pointX, pointY);
+        
+        if(letter.equals(WALL_LETTER) || letter.equals(WINDOW_LETTER) ||
+           letter.equals(ELEVATOR_LETTER) || letter.equals(STAIRS_LETTER)){
+            valid = false;
+        }
+        
+        return valid;
+    }
+    
+    private boolean goneThere(Point2D point){
+        boolean goneThere = false;
+        Iterator routeIterator = this.route.iterator();
+        
+        while(routeIterator.hasNext() && goneThere == false){
+            CoordinateAgent coordinateAgent = (CoordinateAgent) routeIterator.next();
+            Point2D agentPoint = coordinateAgent.getCoordinate();
+            if(point.equals(agentPoint)){
+                goneThere = true;
+            }
+        }
+        
+        return goneThere;
+    }
+    
+    private static boolean isNumeric(String value){
+        try{
+            Integer.parseInt(value);
+            return true;
+        }catch(NumberFormatException nfe){
+            return false;
+        }
     }
     
     @Override

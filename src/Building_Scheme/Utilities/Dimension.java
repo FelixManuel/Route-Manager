@@ -149,8 +149,8 @@ public class Dimension {
     public Object clone(){
         Dimension newPlane = new Dimension(this.rows, this.columns);
         
-        for(int row = 0; row<this.rows-1; row++){
-            for(int column = 0; column<this.columns-1; column++){
+        for(int row = 0; row<this.rows; row++){
+            for(int column = 0; column<this.columns; column++){
                 String value = this.getValue(row, column);
                 newPlane.setValue(row, column, value);
             }
