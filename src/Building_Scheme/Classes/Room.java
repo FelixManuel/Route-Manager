@@ -81,43 +81,35 @@ public class Room {
         int finalPointX = finalPoint.getX();
         int finalPointY = finalPoint.getY();
         
-        for(int i = startingPointY; i<=finalPointY; i++){
-            if(startingPointX-1 >= 0){
-                String value = schematicPlane.getValue(startingPointX-1, i);
-                if(value.equals(HALL_LETTER)){
-                    Integer planeTemperature = Integer.parseInt(temperaturePlane.getValue(startingPointX-1, i));
-                    Integer newTemperature = (temperature+planeTemperature)/2;
-                    temperaturePlane.setValue(startingPointX-1, i, newTemperature.toString());
-                }
+        for(int column = startingPointY; column<=finalPointY; column++){
+            if(startingPointX-1 >= 0 && hasHallValue(schematicPlane, startingPointX-1, column)){
+                Integer planeTemperature = Integer.parseInt(temperaturePlane.getValue(startingPointX-1, column));
+                Integer newTemperature = (temperature+planeTemperature)/2;
+                temperaturePlane.setValue(startingPointX-1, column, newTemperature.toString());
             }
-            if(finalPointX+1 <= schematicPlane.getRows()-1){
-                String value = schematicPlane.getValue(finalPointX+1, i);
-                if(value.equals(HALL_LETTER)){
-                    Integer planeTemperature = Integer.parseInt(temperaturePlane.getValue(finalPointX+1, i));
-                    Integer newTemperature = (temperature+planeTemperature)/2;
-                    temperaturePlane.setValue(finalPointX+1, i, newTemperature.toString());
-                }
+            if(finalPointX+1 <= schematicPlane.getRows()-1 && hasHallValue(schematicPlane, finalPointX+1, column)){
+                Integer planeTemperature = Integer.parseInt(temperaturePlane.getValue(finalPointX+1, column));
+                Integer newTemperature = (temperature+planeTemperature)/2;
+                temperaturePlane.setValue(finalPointX+1, column, newTemperature.toString());                
             }
         }
         
-        for(int i = startingPointX; i<=finalPointX; i++){
-            if(startingPointY-1 >= 0){
-                String value = schematicPlane.getValue(i, startingPointY-1);
-                if(value.equals(HALL_LETTER)){
-                    Integer planeTemperature = Integer.parseInt(temperaturePlane.getValue(i, startingPointY-1));
-                    Integer newTemperature = (temperature+planeTemperature)/2;
-                    temperaturePlane.setValue(i, startingPointY-1, newTemperature.toString());
-                }
+        for(int row = startingPointX; row<=finalPointX; row++){
+            if(startingPointY-1 >= 0 && hasHallValue(schematicPlane, row, startingPointY-1)){
+                Integer planeTemperature = Integer.parseInt(temperaturePlane.getValue(row, startingPointY-1));
+                Integer newTemperature = (temperature+planeTemperature)/2;
+                temperaturePlane.setValue(row, startingPointY-1, newTemperature.toString());                
             }
-            if(finalPointY+1 <= schematicPlane.getColumns()-1){
-                String value = schematicPlane.getValue(i, finalPointY+1);
-                if(value.equals(HALL_LETTER)){
-                    Integer planeTemperature = Integer.parseInt(temperaturePlane.getValue(i, finalPointY+1));
-                    Integer newTemperature = (temperature+planeTemperature)/2;
-                    temperaturePlane.setValue(i, finalPointY+1, newTemperature.toString());
-                }
+            if(finalPointY+1 <= schematicPlane.getColumns()-1 && hasHallValue(schematicPlane, row, finalPointY+1)){
+                Integer planeTemperature = Integer.parseInt(temperaturePlane.getValue(row, finalPointY+1));
+                Integer newTemperature = (temperature+planeTemperature)/2;
+                temperaturePlane.setValue(row, finalPointY+1, newTemperature.toString());
             }
         }
+    }
+    
+    private boolean hasHallValue(Dimension schematicPlane, int row, int column){
+        return schematicPlane.getValue(row, column).equals(HALL_LETTER);
     }
     
     public void cleanRoom(Dimension plane){
