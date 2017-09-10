@@ -36,10 +36,12 @@ public class FileInformation {
         } catch (FileNotFoundException ex) {
             Logger.getLogger(FileInformation.class.getName()).log(Level.SEVERE, null, ex);
         } finally{
-            try {
-                fr.close();
-            } catch (IOException ex) {
-                Logger.getLogger(FileInformation.class.getName()).log(Level.SEVERE, null, ex);
+            if(fr != null){
+                try {
+                    fr.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(FileInformation.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
         
@@ -58,10 +60,12 @@ public class FileInformation {
         }catch(FileNotFoundException ex){
             Logger.getLogger(FileInformation.class.getName()).log(Level.SEVERE, null, ex);
         }finally{
-            try {
-                fr.close();
-            } catch (IOException ex) {
-                Logger.getLogger(FileInformation.class.getName()).log(Level.SEVERE, null, ex);
+            if(fr != null){
+                try {
+                    fr.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(FileInformation.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
         
@@ -80,10 +84,12 @@ public class FileInformation {
         }catch(FileNotFoundException ex){
             Logger.getLogger(FileInformation.class.getName()).log(Level.SEVERE, null, ex);
         } finally{
-            try {
-                fr.close();
-            } catch (IOException ex) {
-                Logger.getLogger(FileInformation.class.getName()).log(Level.SEVERE, null, ex);
+            if(fr != null){
+                try {
+                    fr.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(FileInformation.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
         
@@ -97,9 +103,16 @@ public class FileInformation {
         try {
             fw = new FileWriter(ROUTE_FOLDER+fileName+".json");
             fw.write(agentScheme);
-            fw.close();
-        } catch (IOException ex) {
+        }catch (IOException ex) {
             Logger.getLogger(FileInformation.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            if(fw != null){
+                try {
+                    fw.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(FileInformation.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
         }       
     }
 }
