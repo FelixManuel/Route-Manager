@@ -58,39 +58,39 @@ public class Floor {
         this.planes.put(SCHEMATIC_PLANE, schematicPlane);
     }
     
-    private void cleanSchematicRooms(Dimension plane){
+    private void cleanSchematicRooms(Dimension schematicPlane){
         for(Room room: this.rooms.values()){
-            room.cleanRoom(plane);
+            room.cleanRoom(schematicPlane);
         }
     }
     
-    private void createFloorElements(Dimension plane){        
+    private void createFloorElements(Dimension anyPlane){        
         for(Room room: this.rooms.values()){
-            room.createRoom(plane);
+            room.createRoom(anyPlane);
         }
         
         for (Elevator elevator: this.elevators.values()){
-            elevator.createElevator(plane);
+            elevator.createElevator(anyPlane);
         }
         
         for (Stairs stairs: this.stairs.values()){
-            stairs.createStairs(plane);
+            stairs.createStairs(anyPlane);
         }
         
         for (Door door: this.doors.values()){
-            door.createDoor(plane);
+            door.createDoor(anyPlane);
         }
         
         for (Window windows: this.windows.values()){
-            windows.createWindow(plane);
+            windows.createWindow(anyPlane);
         }
     }
     
-    public void floorTemperatureStatus(ArrayList<RoomStatus> rooms){
+    public void floorTemperatureStatus(ArrayList<RoomStatus> roomsStatus){
         Dimension temperaturePlane = this.planes.get(TEMPERATURE_PLANE);
         Dimension schematicPlane = this.planes.get(SCHEMATIC_PLANE);
         
-        for(RoomStatus room: rooms){
+        for(RoomStatus room: roomsStatus){
             String roomName = room.getName();
             
             if(this.rooms.containsKey(roomName)){

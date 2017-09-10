@@ -119,12 +119,12 @@ public class Dimension {
         for (int row = 0; row < this.plane.length; row++) {
             for (int column = 0; column < this.plane[row].length; column++){
                 if(Dimension.isNumeric(this.getValue(row, column))){
-                    representationPlane.append(COLOR_BLUE + this.getValue(row, column) + " ");// += COLOR_BLUE + this.getValue(row, column) + " ";
+                    representationPlane.append(COLOR_BLUE + this.getValue(row, column) + " ");
                 }else{
-                    representationPlane.append(COLOR_BLACK + this.getValue(row, column) + "  ");// += COLOR_BLACK + this.getValue(row, column) + "  ";  
+                    representationPlane.append(COLOR_BLACK + this.getValue(row, column) + "  ");
                 }
             }
-            representationPlane.append("\n");// += "\n";
+            representationPlane.append("\n");
         }
         
         return representationPlane.toString();
