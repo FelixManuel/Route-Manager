@@ -241,6 +241,11 @@ public class AgentRoute implements Comparable{
             return 0;
         }
     }
+    
+    @Override
+    public boolean equals(Object agent){
+        return false;
+    }
 
     @Override
     public AgentRoute clone(){
