@@ -71,6 +71,7 @@ public class Main_Program {
     }
     
     private void fireAlarm(){
+        AgentRoute agentRoute = null;
         ArrayList<Point2D> exits = getExits();
         HashMap<String, Dimension> temperaturePlanes = getTemperaturePlanes();
         int rows = this.building.getFirstFloor().getPlane().getRows();
@@ -78,7 +79,7 @@ public class Main_Program {
         
         for(AgentScheme agent: this.agents.values()){
             CoordinateAgent coordinateAgent = agent.getCoordinate();
-            AgentRoute agentRoute = new AgentRoute(exits, temperaturePlanes, rows, columns, coordinateAgent);
+            agentRoute = new AgentRoute(exits, temperaturePlanes, rows, columns, coordinateAgent);
             ArrayList<CoordinateAgent> route = Route.generationRoute(agentRoute);
             agent.setRoute(route);
             FileInformation.saveAgentRoute(agent, "route_"+agent.getIdentification());

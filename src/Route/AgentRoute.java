@@ -122,6 +122,7 @@ public class AgentRoute implements Comparable{
     }
     
     public ArrayList<AgentRoute> complections(){
+        CoordinateAgent newCoordinate = null;
         ArrayList<AgentRoute> complections = new ArrayList<>();
         
         CoordinateAgent agent = this.route.get(this.route.size()-1);
@@ -129,7 +130,7 @@ public class AgentRoute implements Comparable{
         for(Point2D point: newPositions){
             AgentRoute newAgent = (AgentRoute)this.clone();
             
-            CoordinateAgent newCoordinate = new CoordinateAgent(point, agent.getFloor());
+            newCoordinate = new CoordinateAgent(point, agent.getFloor());
             newAgent.addCoordinateAgentInRoute(newCoordinate);
             
             newAgent.setMovements(newAgent.getMovements()+1);
