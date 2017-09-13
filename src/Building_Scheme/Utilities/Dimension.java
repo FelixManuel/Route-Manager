@@ -1,5 +1,8 @@
 package Building_Scheme.Utilities;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  * @author Felix Manuel Mellado
  */
@@ -145,7 +148,7 @@ public class Dimension {
     }
     
     @Override
-    public Object clone(){
+    public Dimension clone(){
         Dimension newPlane = new Dimension(this.rows, this.columns);
         
         for(int row = 0; row<this.rows; row++){

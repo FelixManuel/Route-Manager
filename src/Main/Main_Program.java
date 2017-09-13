@@ -127,7 +127,7 @@ public class Main_Program {
         HashMap<String, Floor> floors = this.building.getFloors();
         for(String floorName: floors.keySet()){
             Dimension temperaturePlane = floors.get(floorName).getTemperaturePlane();
-            Dimension newTemperaturePlane = (Dimension) temperaturePlane.clone();
+            Dimension newTemperaturePlane = temperaturePlane.clone();
             temperaturePlanes.put(floorName, newTemperaturePlane);
         }
         

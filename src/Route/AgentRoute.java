@@ -242,7 +242,7 @@ public class AgentRoute implements Comparable{
     }
 
     @Override
-    public Object clone(){
+    public AgentRoute clone(){
         HashMap<String, Dimension> temperatureplanes = new HashMap<>(this.temperaturePlanes);
         ArrayList<CoordinateAgent> route = new ArrayList<>(this.route);
         AgentRoute newAgent = new AgentRoute(this.exits, route, this.movements,

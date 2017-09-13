@@ -19,7 +19,7 @@ public class Route {
         while(!mound.isEmpty()){
             partialSolution = mound.poll();
             if(partialSolution.isSolution()){
-                solution = (AgentRoute) partialSolution.clone();
+                solution = partialSolution.clone();
                 quota = partialSolution.getConsumedPoints();
             }else{
                 for(AgentRoute sonAgentRoute: partialSolution.complections()){

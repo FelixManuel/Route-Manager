@@ -3,7 +3,7 @@
   "floors":
     { "floor_0": {
         "plane": { "rows": 10, "columns": 10 },
-        "planes": {},
+        "planes":{},
         "elevators":
 			     { "elevator_1": {
                 "coordinate": { "coordinate": [
