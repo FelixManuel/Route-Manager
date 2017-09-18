@@ -4,6 +4,6 @@
         {"name": "kitchen",
          "temperature": 50},
         {"name": "living_room",
-         "temperature": 28}
+         "temperature": 99}
     ]
 }

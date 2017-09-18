@@ -8,6 +8,8 @@ import Building_Scheme.Utilities.Dimension;
 import Building_Status.FloorStatus;
 import File.FileInformation;
 import Route.AgentRoute;
+import Route.EvacuationAgentRoute;
+import Route.FireAgentRoute;
 import Route.Route;
 import Utilities.Point2D;
 import java.io.File;
@@ -47,7 +49,8 @@ public class Controller {
         this.building.print();
         System.out.println("--------------------");
         
-        fireEvacuation();
+    //    fireEvacuation();
+        shortEvacuation();
     }
     
     private void loadingAgents(){     
@@ -81,7 +84,7 @@ public class Controller {
         
         for(AgentScheme agent: this.agents.values()){
             CoordinateAgent coordinateAgent = agent.getCoordinate();
-            agentRoute = new AgentRoute(exits, temperaturePlanes, rows, columns, coordinateAgent);
+            agentRoute = new FireAgentRoute(exits, temperaturePlanes, rows, columns, coordinateAgent);
             ArrayList<CoordinateAgent> route = Route.generationRoute(agentRoute);
             agent.setRoute(route);
             FileInformation.saveAgentRoute(agent, "FireEvacuation_"+agent.getIdentification());
@@ -97,7 +100,7 @@ public class Controller {
         
         for(AgentScheme agent: this.agents.values()){
             CoordinateAgent coordinateAgent = agent.getCoordinate();
-            agentRoute = new AgentRoute(exits, planes, rows, columns, coordinateAgent);
+            agentRoute = new EvacuationAgentRoute(exits, planes, rows, columns, coordinateAgent);
             ArrayList<CoordinateAgent> route = Route.generationRoute(agentRoute);
             agent.setRoute(route);
             FileInformation.saveAgentRoute(agent, "Evacuation_"+agent.getIdentification());

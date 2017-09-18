@@ -11,9 +11,9 @@ public class CoordinateAgent {
     private String floor;
     
     //Constructor
-    public CoordinateAgent(Point2D coordinate, String floor){
+    public CoordinateAgent(Point2D coordinate, String nameFloor){
         this.coordinate = coordinate;
-        this.floor = floor;
+        this.floor = nameFloor;
     }
     
     //Getter Methods
@@ -21,7 +21,7 @@ public class CoordinateAgent {
         return this.coordinate;
     }
     
-    public String getFloor(){
+    public String getNameFloor(){
         return this.floor;
     }
 }
