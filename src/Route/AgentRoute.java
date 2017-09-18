@@ -45,7 +45,7 @@ public class AgentRoute implements Comparable{
         this.consumedPoints = addConsumedPoint(this.route.get(this.route.size()-1));
     }
     
-    public AgentRoute(ArrayList<Point2D> exits, ArrayList<CoordinateAgent> route, int movements,
+    private AgentRoute(ArrayList<Point2D> exits, ArrayList<CoordinateAgent> route, int movements,
                       int consumedPoints, HashMap<String, Dimension> temperaturePlane, int rows,
                       int columns){
         this.exits = exits;
@@ -117,8 +117,8 @@ public class AgentRoute implements Comparable{
         }
     }
     
-    private void addCoordinateAgentInRoute(CoordinateAgent corrdianteAgent){
-        this.route.add(corrdianteAgent);
+    private void addCoordinateAgentInRoute(CoordinateAgent coordinateAgent){
+        this.route.add(coordinateAgent);
     }
     
     public ArrayList<AgentRoute> complections(){

@@ -1,4 +1,4 @@
-package Main;
+package Controller;
 
 import Agent_Scheme.AgentScheme;
 import Agent_Scheme.Utilities.CoordinateAgent;
@@ -18,7 +18,7 @@ import java.util.Scanner;
 /**
  * @author Felix Manuel Mellado
  */
-public class Main_Program {
+public class Controller {
     //Attributes
     private BuildingScheme building;
     private HashMap<Integer,AgentScheme> agents;
@@ -29,10 +29,13 @@ public class Main_Program {
     private static final String DOOR_LETTER = "D";
     
     //Constructor
-    public Main_Program(BuildingScheme building){
+    public Controller(BuildingScheme building){
         this.building = building;
         this.agents = new HashMap<>();
-        
+    }
+    
+    //Methods
+    public void start(){            
         this.building.buildFloors();
         
         this.building.print();
@@ -44,10 +47,9 @@ public class Main_Program {
         this.building.print();
         System.out.println("--------------------");
         
-        fireAlarm();
+        fireEvacuation();
     }
     
-    //Methods
     private void loadingAgents(){     
         AgentScheme agentScheme;
         File agentFolder = new File(AGENT_FOLDER);
@@ -70,7 +72,7 @@ public class Main_Program {
         }
     }
     
-    private void fireAlarm(){
+    public void fireEvacuation(){
         AgentRoute agentRoute = null;
         ArrayList<Point2D> exits = getExits();
         HashMap<String, Dimension> temperaturePlanes = getTemperaturePlanes();
@@ -82,7 +84,23 @@ public class Main_Program {
             agentRoute = new AgentRoute(exits, temperaturePlanes, rows, columns, coordinateAgent);
             ArrayList<CoordinateAgent> route = Route.generationRoute(agentRoute);
             agent.setRoute(route);
-            FileInformation.saveAgentRoute(agent, "route_"+agent.getIdentification());
+            FileInformation.saveAgentRoute(agent, "FireEvacuation_"+agent.getIdentification());
+        }
+    }
+    
+    public void shortEvacuation(){
+        AgentRoute agentRoute = null;
+        ArrayList<Point2D> exits = getExits();
+        HashMap<String, Dimension> planes = getPlanes();
+        int rows = this.building.getFirstFloor().getPlane().getRows();
+        int columns = this.building.getFirstFloor().getPlane().getColumns();
+        
+        for(AgentScheme agent: this.agents.values()){
+            CoordinateAgent coordinateAgent = agent.getCoordinate();
+            agentRoute = new AgentRoute(exits, planes, rows, columns, coordinateAgent);
+            ArrayList<CoordinateAgent> route = Route.generationRoute(agentRoute);
+            agent.setRoute(route);
+            FileInformation.saveAgentRoute(agent, "Evacuation_"+agent.getIdentification());
         }
     }
     
@@ -123,6 +141,18 @@ public class Main_Program {
         return exits;
     }
     
+    private HashMap<String, Dimension> getPlanes(){
+        HashMap<String, Dimension> planes = new HashMap<>();
+        HashMap<String, Floor> floors = this.building.getFloors();
+        for(String floorName: floors.keySet()){
+            Dimension plane = floors.get(floorName).getPlane();
+            Dimension newPlane = plane.clone();
+            planes.put(floorName, newPlane);
+        }
+        
+        return planes;
+    }
+    
     private HashMap<String, Dimension> getTemperaturePlanes(){
         HashMap<String, Dimension> temperaturePlanes = new HashMap<>();
         HashMap<String, Floor> floors = this.building.getFloors();
@@ -142,6 +172,8 @@ public class Main_Program {
         String fileName = sc.next();        
         
         BuildingScheme building = FileInformation.extractBuildingInformation(fileName);
-        Main_Program controller = new Main_Program(building);
+        Controller controller = new Controller(building);
+        
+        controller.start();
     }
 }
