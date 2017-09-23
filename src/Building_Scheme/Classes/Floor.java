@@ -104,7 +104,6 @@ public class Floor {
       PARA COMPROBAR QUE SE FORMAN BIEN LOS PLANOS.*/    
     public void print(){
         System.out.println(this.plane.toString());
-        System.out.println(this.planes.get("Temperature").toStringTemperaturePlane());
-        System.out.println(this.planes.get("Schematic").toString());
+        System.out.println(this.planes.get(TEMPERATURE_PLANE).toStringTemperaturePlane());
     }
 }

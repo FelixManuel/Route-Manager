@@ -24,6 +24,7 @@ public class Controller {
     //Attributes
     private BuildingScheme building;
     private HashMap<Integer,AgentScheme> agents;
+    private static final String BUILDING_FOLDER = "buildingScheme//";
     private static final String AGENT_FOLDER = "agentScheme//";
     private static final String BUILDINGSTATUS_FOLDER = "buildingStatus//";
     
@@ -31,26 +32,56 @@ public class Controller {
     private static final String DOOR_LETTER = "D";
     
     //Constructor
+    public Controller(){
+        loadingBuilding();
+        this.building.buildFloors();
+        this.agents = new HashMap<>();
+    }
+    
     public Controller(BuildingScheme building){
         this.building = building;
+        this.building.buildFloors();
         this.agents = new HashMap<>();
     }
     
     //Methods
-    public void start(){            
-        this.building.buildFloors();
-        
-        this.building.print();
-        System.out.println("--------------------");
-        
+    public void addAgent(AgentScheme agent){
+        this.agents.put(agent.getIdentification(), agent);
+    }
+    
+    public void addAgents(ArrayList<AgentScheme> agents){
+        for(AgentScheme agent: agents){
+            this.agents.put(agent.getIdentification(), agent);
+        }
+    }
+    
+    public void addAgentsFromFolder(){
         loadingAgents();
+    }
+    
+    public void addFloorStatus(FloorStatus floorStatus){
+        this.building.updateTemperatureFloors(floorStatus);
+    }
+    
+    public void addFloorsStatus(ArrayList<FloorStatus> floorsStatus){
+        for(FloorStatus floorStatus: floorsStatus){
+            this.building.updateTemperatureFloors(floorStatus);
+        }
+    }
+    
+    public void addFloorStatusFromFolder(){
         loadingBuildingStatus();
+    }
+    
+    private void loadingBuilding(){    
+        BuildingScheme building;
+        File buildingFolder = new File(BUILDING_FOLDER);
+        File[] listOfBuilding = buildingFolder.listFiles();
         
-        this.building.print();
-        System.out.println("--------------------");
-        
-    //    fireEvacuation();
-        shortEvacuation();
+        for(File file: listOfBuilding){
+            building = FileInformation.extractBuildingInformation(file.getName());
+            this.building = building;
+        }
     }
     
     private void loadingAgents(){     
@@ -89,6 +120,8 @@ public class Controller {
             agent.setRoute(route);
             FileInformation.saveAgentRoute(agent, "FireEvacuation_"+agent.getIdentification());
         }
+    
+        printRoute();
     }
     
     public void shortEvacuation(){
@@ -105,6 +138,8 @@ public class Controller {
             agent.setRoute(route);
             FileInformation.saveAgentRoute(agent, "Evacuation_"+agent.getIdentification());
         }
+        
+        printRoute();
     }
     
     private ArrayList<Point2D> getExits(){
@@ -168,15 +203,19 @@ public class Controller {
         return temperaturePlanes;
     }
     
-    public static void main(String args[]){               
-        Scanner sc = new Scanner(System.in);
-        
-        System.out.println("Insert the name of the file(add '.json' at the end): "); 
-        String fileName = sc.next();        
-        
-        BuildingScheme building = FileInformation.extractBuildingInformation(fileName);
-        Controller controller = new Controller(building);
-        
-        controller.start();
+    public void printMap(){
+        this.building.print();
+    }
+    
+    private void printRoute(){        
+        for(AgentScheme agent: this.agents.values()){
+            Dimension plane = this.building.getFirstFloor().getPlane().clone();
+            for(CoordinateAgent coordinateAgent: agent.getRoute()){
+                int row = coordinateAgent.getCoordinate().getX();
+                int column = coordinateAgent.getCoordinate().getY();
+                plane.setValue(row, column, "X");
+            }
+            System.out.println(plane.toString());
+        }
     }
 }

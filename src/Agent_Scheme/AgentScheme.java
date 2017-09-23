@@ -21,6 +21,10 @@ public class AgentScheme {
         return this.coordinate;
     }
     
+    public ArrayList<CoordinateAgent> getRoute(){
+        return this.route;
+    }
+    
     //Setter Methods
     public void setRoute(ArrayList<CoordinateAgent> route){
         this.route = route;

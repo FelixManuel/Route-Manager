@@ -102,10 +102,25 @@ public class Dimension {
     @Override
     public String toString(){
         StringBuilder representationPlane = new StringBuilder("");
+        String value;
         
         for (int row = 0; row < this.plane.length; row++) {
             for (int column = 0; column < this.plane[row].length; column++) {
-                representationPlane.append(this.getValue(row, column) + " ");
+                value = this.getValue(row, column);
+                if((value.equals("W") || value.equals("w") || value.equals("E") || value.equals("S"))&&
+                    (row == 0 || row == this.plane.length-1)){
+                    value = "-";
+                }else if((value.equals("W") || value.equals("w") || value.equals("E") || value.equals("S"))&&
+                    (column == 0 || column == this.plane[row].length-1)){
+                    value = "|";
+                }else if(value.equals("D")){
+                    value = " ";
+                }else if(value.equals("W") || value.equals("E") || value.equals("S")){
+                    value = "\\";
+                }else if(value.equals("X")){
+                    value = "X";
+                }
+                representationPlane.append(value + " ");
             }            
             representationPlane.append("\n");
         }
