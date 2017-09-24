@@ -118,10 +118,9 @@ public class Controller {
             agentRoute = new FireAgentRoute(exits, temperaturePlanes, rows, columns, coordinateAgent);
             ArrayList<CoordinateAgent> route = Route.generationRoute(agentRoute);
             agent.setRoute(route);
-            FileInformation.saveAgentRoute(agent, "FireEvacuation_"+agent.getIdentification());
+            FileInformation.saveAgentRoute(agent, "FireEvacuation_"+agent.getIdentification());            
+            printRoute(agent.getIdentification());
         }
-    
-        printRoute();
     }
     
     public void shortEvacuation(){
@@ -137,9 +136,8 @@ public class Controller {
             ArrayList<CoordinateAgent> route = Route.generationRoute(agentRoute);
             agent.setRoute(route);
             FileInformation.saveAgentRoute(agent, "Evacuation_"+agent.getIdentification());
+            printRoute(agent.getIdentification());
         }
-        
-        printRoute();
     }
     
     private ArrayList<Point2D> getExits(){
@@ -207,15 +205,14 @@ public class Controller {
         this.building.print();
     }
     
-    private void printRoute(){        
-        for(AgentScheme agent: this.agents.values()){
-            Dimension plane = this.building.getFirstFloor().getPlane().clone();
-            for(CoordinateAgent coordinateAgent: agent.getRoute()){
-                int row = coordinateAgent.getCoordinate().getX();
-                int column = coordinateAgent.getCoordinate().getY();
-                plane.setValue(row, column, "X");
-            }
-            System.out.println(plane.toString());
+    private void printRoute(int identification){        
+        AgentScheme agent = this.agents.get(identification);
+        Dimension plane = this.building.getFirstFloor().getPlane().clone();
+        for(CoordinateAgent coordinateAgent: agent.getRoute()){
+            int row = coordinateAgent.getCoordinate().getX();
+            int column = coordinateAgent.getCoordinate().getY();
+            plane.setValue(row, column, "X");
         }
+        System.out.println(plane.toString());        
     }
 }

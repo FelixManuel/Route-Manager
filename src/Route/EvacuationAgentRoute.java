@@ -38,7 +38,9 @@ public class EvacuationAgentRoute extends AgentRoute{
             int actualPositionX = this.getRoute().get(routeSize).getCoordinate().getX();
             int actualPositionY = this.getRoute().get(routeSize).getCoordinate().getY();
             
-            int newResult = (Math.abs(exitX-actualPositionX) + Math.abs(exitY-actualPositionY));
+            int calculate = (Math.abs(exitX-actualPositionX) + Math.abs(exitY-actualPositionY));
+            
+            int newResult = (int)(calculate * 0.25 + calculate);
             if(newResult < result){
                 result = newResult;
             }

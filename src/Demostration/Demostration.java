@@ -35,16 +35,16 @@ public class Demostration {
                     String fileName = sc.next();
                     BuildingScheme building = FileInformation.extractBuildingInformation(fileName);
                     
-                    controller = new Controller(building);
+                    controller = new Controller(building);                    
+                    controller.printMap();
                     break;
                     
                 case 2:
-                    controller = new Controller();
+                    controller = new Controller();       
+                    controller.printMap();
                     break;
             }
         }while(number != 1 && number != 2);
-        
-        controller.printMap();
         
         return controller;
     }
@@ -59,9 +59,9 @@ public class Demostration {
             System.out.println("3.- Add agents from folder.");
             System.out.println("4.- Add floor temperature status.");
             System.out.println("5.- Add floor temperatures status.");
-            System.out.println("5.- Add floor temperature status from folder.");
-            System.out.println("6.- Fire Emergency Evacuation.");
-            System.out.println("7.- Short Emergency Evacuation.");
+            System.out.println("6.- Add floor temperature status from folder.");
+            System.out.println("7.- Fire Emergency Evacuation.");
+            System.out.println("8.- Short Emergency Evacuation.");
             System.out.println("0.- Salir.");
             
             Scanner sc = new Scanner(System.in);
@@ -73,17 +73,17 @@ public class Demostration {
                 case 3:
                     controller.addAgentsFromFolder();
                     break;
-                case 5:
-                    controller.addFloorStatusFromFolder();
-                    break;
                 case 6:
-                    controller.fireEvacuation();
+                    controller.addFloorStatusFromFolder();
+                    controller.printMap();
                     break;
                 case 7:
+                    controller.fireEvacuation();
+                    break;
+                case 8:
                     controller.shortEvacuation();
                     break;
-            }
-            
+            }            
         }while(number != 0);
     }
 }

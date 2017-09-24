@@ -1,9 +1,15 @@
 {
     "name": "floor_0",
     "rooms": [
-        {"name": "kitchen",
-         "temperature": 50},
-        {"name": "living_room",
+        {"name": "room_10",
+         "temperature": 99},
+        {"name": "room_5",
+         "temperature": 99},
+        {"name": "room_11",
+         "temperature": 99},
+        {"name": "room_6",
+         "temperature": 99},
+        {"name": "room_4",
          "temperature": 99}
     ]
 }

@@ -147,10 +147,20 @@ public abstract class AgentRoute implements Comparable{
         Point2D columnLess = new Point2D(lastPositionX, lastPositionY-1);
         Point2D columnMore = new Point2D(lastPositionX, lastPositionY+1);
         
+        Point2D upperRightDiagonal = new Point2D(lastPositionX-1, lastPositionY+1);
+        Point2D upperLeftDiagonal = new Point2D(lastPositionX-1, lastPositionY-1);
+        Point2D downRightDiagonal = new Point2D(lastPositionX+1, lastPositionY+1);
+        Point2D downLeftDiagonal = new Point2D(lastPositionX+1, lastPositionY-1);
+        
         solution.add(rowLess);
         solution.add(rowMore);
         solution.add(columnLess);
         solution.add(columnMore);
+        
+        solution.add(upperRightDiagonal);
+        solution.add(upperLeftDiagonal);
+        solution.add(downRightDiagonal);
+        solution.add(downLeftDiagonal);
         
         ArrayList<Point2D> elementsToRemove = new ArrayList<>();
         int solutionSize = solution.size();
