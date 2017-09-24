@@ -1,6 +1,6 @@
 package Agent_Scheme;
 
-import Agent_Scheme.Utilities.CoordinateAgent;
+import Agent_Scheme.Utilities.CoordAgent;
 import java.util.ArrayList;
 
 /**
@@ -8,25 +8,25 @@ import java.util.ArrayList;
  */
 public class AgentScheme {
     //Attributes
-    private CoordinateAgent coordinate;
+    private CoordAgent coordinate;
     private int identification;
-    private ArrayList<CoordinateAgent> route;
+    private ArrayList<CoordAgent> route;
     
     //Getter Method
     public int getIdentification(){
         return this.identification;
     }
     
-    public CoordinateAgent getCoordinate(){
+    public CoordAgent getCoordinate(){
         return this.coordinate;
     }
     
-    public ArrayList<CoordinateAgent> getRoute(){
+    public ArrayList<CoordAgent> getRoute(){
         return this.route;
     }
     
     //Setter Methods
-    public void setRoute(ArrayList<CoordinateAgent> route){
+    public void setRoute(ArrayList<CoordAgent> route){
         this.route = route;
     }
 }

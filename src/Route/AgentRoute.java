@@ -1,6 +1,6 @@
 package Route;
 
-import Agent_Scheme.Utilities.CoordinateAgent;
+import Agent_Scheme.Utilities.CoordAgent;
 import Building_Scheme.Utilities.Dimension;
 import Utilities.Point2D;
 import java.util.ArrayList;
@@ -13,7 +13,7 @@ import java.util.Iterator;
 public abstract class AgentRoute implements Comparable{
     //Attributes
     private ArrayList<Point2D> exits;
-    private ArrayList<CoordinateAgent> route;
+    private ArrayList<CoordAgent> route;
     private int consumedPoints;
     private int movements;
     private HashMap<String, Dimension> planes;
@@ -27,8 +27,8 @@ public abstract class AgentRoute implements Comparable{
     private static final String STAIRS_LETTER = "S";
     
     //Constructor
-    public AgentRoute(ArrayList<Point2D> exits, HashMap<String, Dimension> planes,
-                      int rows, int columns, CoordinateAgent coordinateAgent){
+    protected AgentRoute(ArrayList<Point2D> exits, HashMap<String, Dimension> planes,
+                      int rows, int columns, CoordAgent coordinateAgent){
         this.exits = exits;
         this.route = new ArrayList<>();
         this.movements = 0;
@@ -39,7 +39,7 @@ public abstract class AgentRoute implements Comparable{
         this.route.add(coordinateAgent);        
     }
     
-    protected AgentRoute(ArrayList<Point2D> exits, ArrayList<CoordinateAgent> route, int movements,
+    protected AgentRoute(ArrayList<Point2D> exits, ArrayList<CoordAgent> route, int movements,
                        int consumedPoints, HashMap<String, Dimension> planes, int rows, int columns){
         this.exits = exits;
         this.route = route;
@@ -55,7 +55,7 @@ public abstract class AgentRoute implements Comparable{
         return this.exits;
     }
     
-    public ArrayList<CoordinateAgent> getRoute(){
+    public ArrayList<CoordAgent> getRoute(){
         return this.route;
     }
     
@@ -107,22 +107,22 @@ public abstract class AgentRoute implements Comparable{
         return solution;
     }
     
-    protected abstract int addConsumedPoint(CoordinateAgent coordinateAgent);
+    protected abstract int addConsumedPoint(CoordAgent coordinateAgent);
     
-    private void addCoordinateAgentInRoute(CoordinateAgent coordinateAgent){
+    private void addCoordinateAgentInRoute(CoordAgent coordinateAgent){
         this.route.add(coordinateAgent);
     }
     
     public ArrayList<AgentRoute> complections(){
-        CoordinateAgent newCoordinate = null;
+        CoordAgent newCoordinate = null;
         ArrayList<AgentRoute> complections = new ArrayList<>();
         
-        CoordinateAgent agent = this.route.get(this.route.size()-1);
+        CoordAgent agent = this.route.get(this.route.size()-1);
         ArrayList<Point2D> newPositions = generatePoints(agent);
         for(Point2D point: newPositions){
             AgentRoute newAgent = this.clone();
             
-            newCoordinate = new CoordinateAgent(point, agent.getNameFloor());
+            newCoordinate = new CoordAgent(point, agent.getNameFloor());
             newAgent.addCoordinateAgentInRoute(newCoordinate);
             
             newAgent.setMovements(newAgent.getMovements()+1);
@@ -134,7 +134,7 @@ public abstract class AgentRoute implements Comparable{
         return complections;
     }
     
-    private ArrayList<Point2D> generatePoints(CoordinateAgent agent){
+    private ArrayList<Point2D> generatePoints(CoordAgent agent){
         Point2D lastPosition = agent.getCoordinate();
         String nameFloor = agent.getNameFloor();
         ArrayList<Point2D> solution = new ArrayList<>();
@@ -212,7 +212,7 @@ public abstract class AgentRoute implements Comparable{
         Iterator routeIterator = this.route.iterator();
         
         while(goneThere == false && routeIterator.hasNext()){
-            CoordinateAgent coordinateAgent = (CoordinateAgent) routeIterator.next();
+            CoordAgent coordinateAgent = (CoordAgent) routeIterator.next();
             Point2D agentPoint = coordinateAgent.getCoordinate();
             if(point.equals(agentPoint)){
                 goneThere = true;

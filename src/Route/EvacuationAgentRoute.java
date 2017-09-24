@@ -1,6 +1,6 @@
 package Route;
 
-import Agent_Scheme.Utilities.CoordinateAgent;
+import Agent_Scheme.Utilities.CoordAgent;
 import Building_Scheme.Utilities.Dimension;
 import Utilities.Point2D;
 import java.util.ArrayList;
@@ -11,12 +11,12 @@ import java.util.HashMap;
  */
 public class EvacuationAgentRoute extends AgentRoute{
 
-    public EvacuationAgentRoute(ArrayList<Point2D> exits, HashMap<String, Dimension> planes, int rows, int columns, CoordinateAgent coordinateAgent) {
+    public EvacuationAgentRoute(ArrayList<Point2D> exits, HashMap<String, Dimension> planes, int rows, int columns, CoordAgent coordinateAgent) {
         super(exits, planes, rows, columns, coordinateAgent);
         this.setConsumedPoints(0);
     }
     
-    private EvacuationAgentRoute(ArrayList<Point2D> exits, ArrayList<CoordinateAgent> route, int movements,
+    private EvacuationAgentRoute(ArrayList<Point2D> exits, ArrayList<CoordAgent> route, int movements,
                                  int consumedPoints, HashMap<String,Dimension> planes, int rows, int columns){
         super(exits, route, movements, consumedPoints, planes, rows, columns);
     }
@@ -50,14 +50,14 @@ public class EvacuationAgentRoute extends AgentRoute{
     }
 
     @Override
-    protected int addConsumedPoint(CoordinateAgent coordinateAgent) {
+    protected int addConsumedPoint(CoordAgent coordinateAgent) {
         return 1;
     }
 
     @Override
     public EvacuationAgentRoute clone() {
         HashMap<String,Dimension> temperaturePlanes = new HashMap<>(this.getPlanes());
-        ArrayList<CoordinateAgent> route = new ArrayList<>(this.getRoute());
+        ArrayList<CoordAgent> route = new ArrayList<>(this.getRoute());
         EvacuationAgentRoute newAgent = new EvacuationAgentRoute(this.getExits(), route, this.getMovements(),
                                                                  this.getConsumedPoints(), temperaturePlanes,
                                                                  this.getRows(), this.getColumns());

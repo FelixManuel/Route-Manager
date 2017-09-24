@@ -1,6 +1,6 @@
 package Route;
 
-import Agent_Scheme.Utilities.CoordinateAgent;
+import Agent_Scheme.Utilities.CoordAgent;
 import java.util.ArrayList;
 import java.util.PriorityQueue;
 import java.util.logging.Level;
@@ -11,7 +11,7 @@ import java.util.logging.Logger;
  */
 public class Route {
     
-    public static ArrayList<CoordinateAgent> generationRoute(AgentRoute agentRoute){
+    public static ArrayList<CoordAgent> generationRoute(AgentRoute agentRoute){
         PriorityQueue<AgentRoute> mound = new PriorityQueue<>();
         int quota = agentRoute.narrow();
         AgentRoute solution = null;

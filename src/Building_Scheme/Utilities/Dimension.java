@@ -107,44 +107,40 @@ public class Dimension {
         for (int row = 0; row < this.plane.length; row++) {
             for (int column = 0; column < this.plane[row].length; column++) {
                 value = this.getValue(row, column);
-                if((value.equals("W") || value.equals("w") || value.equals("E") || value.equals("S"))&&
-                    (row == 0 || row == this.plane.length-1)){
-                    value = "-";
-                }else if((value.equals("W") || value.equals("w") || value.equals("E") || value.equals("S"))&&
-                    (column == 0 || column == this.plane[row].length-1)){
-                    value = "|";
+                if((value.equals("W") || value.equals("w") || value.equals("E") || value.equals("S"))&&(row == 0 || row == this.plane.length-1)){
+                    value = "\u001B[30m-";
+                }else if((value.equals("W") || value.equals("w") || value.equals("E") || value.equals("S"))&&(column == 0 || column == this.plane[row].length-1)){
+                    value = "\u001B[30m|";
                 }else if(value.equals("D")){
                     value = " ";
                 }else if(value.equals("W") || value.equals("E") || value.equals("S")){
-                    value = "\\";
+                    value = "\u001B[30m\\";
                 }else if(value.equals("X")){
-                    value = "X";
+                    value = "\u001B[34mX";
                 }
                 representationPlane.append(value + " ");
             }            
             representationPlane.append("\n");
-        }
-        
+        }        
         return representationPlane.toString();
     }
     
     public String toStringTemperaturePlane(){
-        final String COLOR_BLUE = "\u001B[34m";
-        final String COLOR_BLACK = "\u001B[30m";
+        final String colorBlue = "\u001B[34m";
+        final String colorBlack = "\u001B[30m";
         
         StringBuilder representationPlane = new StringBuilder("");
         
         for (int row = 0; row < this.plane.length; row++) {
             for (int column = 0; column < this.plane[row].length; column++){
                 if(Dimension.isNumeric(this.getValue(row, column))){
-                    representationPlane.append(COLOR_BLUE + this.getValue(row, column) + " ");
+                    representationPlane.append(colorBlue + this.getValue(row, column) + " ");
                 }else{
-                    representationPlane.append(COLOR_BLACK + this.getValue(row, column) + "  ");
+                    representationPlane.append(colorBlack + this.getValue(row, column) + "  ");
                 }
             }
             representationPlane.append("\n");
-        }
-        
+        }        
         return representationPlane.toString();
     }
     

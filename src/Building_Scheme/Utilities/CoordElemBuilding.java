@@ -5,12 +5,12 @@ import Utilities.Point2D;
 /**
  * @author Felix Manuel Mellado
  */
-public class CoordinateElementBuilding {
+public class CoordElemBuilding {
     //Atributes
     private Point2D[] coordinate;
     
     //Constructor
-    public CoordinateElementBuilding(){
+    public CoordElemBuilding(){
         this.coordinate = new Point2D[2];
     }
     

@@ -15,7 +15,7 @@ public class BuildingScheme {
     private HashMap<String,Floor> floors;
     
     //Obligatory Attribute
-    private static String FIRST_FLOOR = "floor_0";
+    private static final String FIRST_FLOOR = "floor_0";
     
     //GetterMethods
     public Floor getFirstFloor(){

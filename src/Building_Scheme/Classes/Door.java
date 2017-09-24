@@ -1,6 +1,6 @@
 package Building_Scheme.Classes;
 
-import Building_Scheme.Utilities.CoordinateElementBuilding;
+import Building_Scheme.Utilities.CoordElemBuilding;
 import Building_Scheme.Utilities.Dimension;
 import Utilities.Point2D;
 
@@ -9,13 +9,13 @@ import Utilities.Point2D;
  */
 public class Door {
     //Attributes
-    private CoordinateElementBuilding coordinate;
+    private CoordElemBuilding coordinate;
     
     //Letter Attribute
     private static final String REPRESENTATIVE_LETTER = "D";
     
     //Getter Methods
-    public CoordinateElementBuilding getCoordinate(){
+    public CoordElemBuilding getCoordinate(){
         return this.coordinate;
     }
     

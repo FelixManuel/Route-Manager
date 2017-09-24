@@ -1,6 +1,6 @@
 package Building_Scheme.Classes;
 
-import Building_Scheme.Utilities.CoordinateElementBuilding;
+import Building_Scheme.Utilities.CoordElemBuilding;
 import Building_Scheme.Utilities.Dimension;
 import Utilities.Point2D;
 import java.util.HashMap;
@@ -10,7 +10,7 @@ import java.util.HashMap;
  */
 public class Room {
     //Attributes
-    private CoordinateElementBuilding coordinate;
+    private CoordElemBuilding coordinate;
     private HashMap<String,Door> doors;
     private HashMap<String,Window> windows;
     
@@ -23,30 +23,23 @@ public class Room {
     //Methods
     public void createRoom(Dimension plane){
         Point2D startingPoint = this.coordinate.getCoordinate()[0];
-        Point2D finalPoint = this.coordinate.getCoordinate()[1];
-        
+        Point2D finalPoint = this.coordinate.getCoordinate()[1];        
         int startingPointX = startingPoint.getX();
         int startingPointY = startingPoint.getY();
         int finalPointX = finalPoint.getX();
-        int finalPointY = finalPoint.getY();
-        
-        plane.setValue(startingPointX, startingPointY, REPRESENTATIVE_LETTER);
-        plane.setValue(finalPointX, finalPointY, REPRESENTATIVE_LETTER);
+        int finalPointY = finalPoint.getY();        
         
         for (int i = startingPointX; i < finalPointX; i++) {
             plane.setValue(i, startingPointY, REPRESENTATIVE_LETTER);
             plane.setValue(i, finalPointY, REPRESENTATIVE_LETTER);
-        }
-        
+        }        
         for (int i = startingPointY; i < finalPointY; i++) {
             plane.setValue(startingPointX, i, REPRESENTATIVE_LETTER);
             plane.setValue(finalPointX, i, REPRESENTATIVE_LETTER);
-        }
-        
+        }        
         for(Door door: this.doors.values()){
             door.createDoor(plane);
-        }
-        
+        }        
         for(Window window: this.windows.values()){
             window.createWindow(plane);
         }
@@ -74,8 +67,7 @@ public class Room {
     
     private void readjustHallTemperature(Dimension schematicPlane, Dimension temperaturePlane, Integer temperature){
         Point2D startingPoint = this.coordinate.getCoordinate()[0];
-        Point2D finalPoint = this.coordinate.getCoordinate()[1];
-        
+        Point2D finalPoint = this.coordinate.getCoordinate()[1];        
         int startingPointX = startingPoint.getX();
         int startingPointY = startingPoint.getY();
         int finalPointX = finalPoint.getX();
@@ -83,33 +75,30 @@ public class Room {
         
         for(int column = startingPointY; column<=finalPointY; column++){
             if(startingPointX-1 >= 0 && hasHallValue(schematicPlane, startingPointX-1, column)){
-                Integer planeTemperature = Integer.parseInt(temperaturePlane.getValue(startingPointX-1, column));
-                Integer newTemperature = (temperature+planeTemperature)/2;
-                temperaturePlane.setValue(startingPointX-1, column, newTemperature.toString());
+                addTemperature(temperaturePlane, startingPointX-1, column, temperature);
             }
             if(finalPointX+1 <= schematicPlane.getRows()-1 && hasHallValue(schematicPlane, finalPointX+1, column)){
-                Integer planeTemperature = Integer.parseInt(temperaturePlane.getValue(finalPointX+1, column));
-                Integer newTemperature = (temperature+planeTemperature)/2;
-                temperaturePlane.setValue(finalPointX+1, column, newTemperature.toString());                
+                addTemperature(temperaturePlane, finalPointX+1, column, temperature);               
             }
-        }
-        
+        }        
         for(int row = startingPointX; row<=finalPointX; row++){
             if(startingPointY-1 >= 0 && hasHallValue(schematicPlane, row, startingPointY-1)){
-                Integer planeTemperature = Integer.parseInt(temperaturePlane.getValue(row, startingPointY-1));
-                Integer newTemperature = (temperature+planeTemperature)/2;
-                temperaturePlane.setValue(row, startingPointY-1, newTemperature.toString());                
+                addTemperature(temperaturePlane, row, startingPointY-1, temperature);             
             }
             if(finalPointY+1 <= schematicPlane.getColumns()-1 && hasHallValue(schematicPlane, row, finalPointY+1)){
-                Integer planeTemperature = Integer.parseInt(temperaturePlane.getValue(row, finalPointY+1));
-                Integer newTemperature = (temperature+planeTemperature)/2;
-                temperaturePlane.setValue(row, finalPointY+1, newTemperature.toString());
+                addTemperature(temperaturePlane, row, finalPointY+1, temperature);               
             }
         }
     }
     
     private boolean hasHallValue(Dimension schematicPlane, int row, int column){
         return schematicPlane.getValue(row, column).equals(HALL_LETTER);
+    }    
+        
+    private void addTemperature(Dimension temperaturePlane, int row, int column, Integer temperature){
+        Integer planeTemperature = Integer.parseInt(temperaturePlane.getValue(row, column));
+        Integer newTemperature = (temperature+planeTemperature)/2;
+        temperaturePlane.setValue(row, column, newTemperature.toString());
     }
     
     public void cleanRoom(Dimension plane){

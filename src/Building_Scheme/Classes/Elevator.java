@@ -1,7 +1,7 @@
 
 package Building_Scheme.Classes;
 
-import Building_Scheme.Utilities.CoordinateElementBuilding;
+import Building_Scheme.Utilities.CoordElemBuilding;
 import Building_Scheme.Utilities.Dimension;
 import Utilities.Point2D;
 import java.util.HashMap;
@@ -11,7 +11,7 @@ import java.util.HashMap;
  */
 public class Elevator {
     //Attributes
-    private CoordinateElementBuilding coordinate;
+    private CoordElemBuilding coordinate;
     private HashMap<String,Boolean> floors;
     
     //Letter Attribute

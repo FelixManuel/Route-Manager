@@ -332,19 +332,7 @@
            },
            "stairs":{},
         "doors":
-           { 
-           "emergency_1": {
-                "coordinate": { "coordinate": [
-                   {"x": 0, "y": 6 },
-                   {"x": 0, "y": 6 }
-                ]}
-             },
-           "emergency_2": {
-                "coordinate": { "coordinate": [
-                   {"x": 0, "y": 24 },
-                   {"x": 0, "y": 24 }
-                ]}
-             },
+           {
            "emergency_3": {
                 "coordinate": { "coordinate": [
                    {"x": 29, "y": 6 },

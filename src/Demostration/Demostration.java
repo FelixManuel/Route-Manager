@@ -12,7 +12,7 @@ public class Demostration {
     
     public static void main(String args[]){
         Controller controller = buildingMenu();
-        Menu(controller);
+        menu(controller);
     }
     
     private static Controller buildingMenu(){
@@ -49,7 +49,7 @@ public class Demostration {
         return controller;
     }
     
-    private static void Menu(Controller controller){
+    private static void menu(Controller controller){
         int number = 0;
         
         do{

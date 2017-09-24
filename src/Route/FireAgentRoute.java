@@ -1,6 +1,6 @@
 package Route;
 
-import Agent_Scheme.Utilities.CoordinateAgent;
+import Agent_Scheme.Utilities.CoordAgent;
 import Building_Scheme.Utilities.Dimension;
 import Utilities.Point2D;
 import java.util.ArrayList;
@@ -17,13 +17,13 @@ public class FireAgentRoute extends AgentRoute{
     private static final int DOOR_VALUE = 0; 
     
     //Constructor
-    public FireAgentRoute(ArrayList<Point2D> exits, HashMap<String, Dimension> planes, int rows, int columns, CoordinateAgent coordinateAgent) {
+    public FireAgentRoute(ArrayList<Point2D> exits, HashMap<String, Dimension> planes, int rows, int columns, CoordAgent coordinateAgent) {
         super(exits, planes, rows, columns, coordinateAgent);
         this.mediumTemperature = temperatureResult();
         this.setConsumedPoints(this.addConsumedPoint(this.getRoute().get(this.getRoute().size()-1)));
     }
     
-    private FireAgentRoute(ArrayList<Point2D> exits, ArrayList<CoordinateAgent> route, int movements,
+    private FireAgentRoute(ArrayList<Point2D> exits, ArrayList<CoordAgent> route, int movements,
                        int consumedPoints, HashMap<String, Dimension> temperaturePlanes, int rows, int columns,
                        int mediumTemperature){
         super(exits, route, movements, consumedPoints, temperaturePlanes, rows, columns);
@@ -59,7 +59,7 @@ public class FireAgentRoute extends AgentRoute{
     }
 
     @Override
-    protected int addConsumedPoint(CoordinateAgent coordinateAgent) {
+    protected int addConsumedPoint(CoordAgent coordinateAgent) {
         int rowAgent = coordinateAgent.getCoordinate().getX();
         int columnAgent = coordinateAgent.getCoordinate().getY();
         Dimension temperaturePlane = this.getPlanes().get(coordinateAgent.getNameFloor());
@@ -98,7 +98,7 @@ public class FireAgentRoute extends AgentRoute{
     @Override
     public FireAgentRoute clone() {
         HashMap<String,Dimension> temperaturePlanes = new HashMap<>(this.getPlanes());
-        ArrayList<CoordinateAgent> route = new ArrayList<>(this.getRoute());
+        ArrayList<CoordAgent> route = new ArrayList<>(this.getRoute());
         FireAgentRoute newAgent = new FireAgentRoute(this.getExits(), route, this.getMovements(),
                                                      this.getConsumedPoints(), temperaturePlanes,
                                                      this.getRows(), this.getColumns(), this.mediumTemperature);

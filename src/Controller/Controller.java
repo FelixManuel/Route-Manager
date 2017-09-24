@@ -1,7 +1,7 @@
 package Controller;
 
 import Agent_Scheme.AgentScheme;
-import Agent_Scheme.Utilities.CoordinateAgent;
+import Agent_Scheme.Utilities.CoordAgent;
 import Building_Scheme.BuildingScheme;
 import Building_Scheme.Classes.Floor;
 import Building_Scheme.Utilities.Dimension;
@@ -15,7 +15,6 @@ import Utilities.Point2D;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Scanner;
 
 /**
  * @author Felix Manuel Mellado
@@ -114,9 +113,9 @@ public class Controller {
         int columns = this.building.getFirstFloor().getPlane().getColumns();
         
         for(AgentScheme agent: this.agents.values()){
-            CoordinateAgent coordinateAgent = agent.getCoordinate();
+            CoordAgent coordinateAgent = agent.getCoordinate();
             agentRoute = new FireAgentRoute(exits, temperaturePlanes, rows, columns, coordinateAgent);
-            ArrayList<CoordinateAgent> route = Route.generationRoute(agentRoute);
+            ArrayList<CoordAgent> route = Route.generationRoute(agentRoute);
             agent.setRoute(route);
             FileInformation.saveAgentRoute(agent, "FireEvacuation_"+agent.getIdentification());            
             printRoute(agent.getIdentification());
@@ -131,9 +130,9 @@ public class Controller {
         int columns = this.building.getFirstFloor().getPlane().getColumns();
         
         for(AgentScheme agent: this.agents.values()){
-            CoordinateAgent coordinateAgent = agent.getCoordinate();
+            CoordAgent coordinateAgent = agent.getCoordinate();
             agentRoute = new EvacuationAgentRoute(exits, planes, rows, columns, coordinateAgent);
-            ArrayList<CoordinateAgent> route = Route.generationRoute(agentRoute);
+            ArrayList<CoordAgent> route = Route.generationRoute(agentRoute);
             agent.setRoute(route);
             FileInformation.saveAgentRoute(agent, "Evacuation_"+agent.getIdentification());
             printRoute(agent.getIdentification());
@@ -208,7 +207,7 @@ public class Controller {
     private void printRoute(int identification){        
         AgentScheme agent = this.agents.get(identification);
         Dimension plane = this.building.getFirstFloor().getPlane().clone();
-        for(CoordinateAgent coordinateAgent: agent.getRoute()){
+        for(CoordAgent coordinateAgent: agent.getRoute()){
             int row = coordinateAgent.getCoordinate().getX();
             int column = coordinateAgent.getCoordinate().getY();
             plane.setValue(row, column, "X");

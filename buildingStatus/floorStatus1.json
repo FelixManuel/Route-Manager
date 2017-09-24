@@ -10,6 +10,8 @@
         {"name": "room_6",
          "temperature": 99},
         {"name": "room_4",
+         "temperature": 99},
+        {"name": "room_9",
          "temperature": 99}
     ]
 }
