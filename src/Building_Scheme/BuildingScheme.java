@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
+ * This class represents the building scheme.
  * @author Felix Manuel Mellado
  */
 public class BuildingScheme {
@@ -18,15 +19,32 @@ public class BuildingScheme {
     private static final String FIRST_FLOOR = "floor_0";
     
     //GetterMethods
+
+    /**
+     * Returns the first floor of the building. It help us to extract
+     * the building exits, dimensions...
+     * @return First floor
+     */
     public Floor getFirstFloor(){
         return this.floors.get(FIRST_FLOOR);
     }
     
+    /**
+     * Returns the floors of the building.
+     * @return floors
+     */
     public HashMap<String, Floor> getFloors(){
         return this.floors;
     }
 
     //Methods
+
+    /**
+     * Build the differents floors of the building. Actually it builds:
+     * - Normal Plane.
+     * - Temperature Plane.
+     * - Schematic Plane.
+     */
     public void buildFloors(){
         for(Floor floor: this.floors.values()){
             floor.createFloorPlane();            
@@ -35,6 +53,10 @@ public class BuildingScheme {
         }
     }
     
+    /**
+     * Update the rooms temperature of one floor.
+     * @param floor
+     */
     public void updateTemperatureFloors(FloorStatus floor){
         String floorName = floor.getName();
         ArrayList<RoomStatus> floorRooms= floor.getRooms();
