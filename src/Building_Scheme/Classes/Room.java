@@ -29,11 +29,11 @@ public class Room {
         int finalPointX = finalPoint.getX();
         int finalPointY = finalPoint.getY();        
         
-        for (int i = startingPointX; i < finalPointX; i++) {
-            plane.setValue(i, startingPointY, REPRESENTATIVE_LETTER);
-            plane.setValue(i, finalPointY, REPRESENTATIVE_LETTER);
+        for (int row = startingPointX; row <= finalPointX; row++) {
+            plane.setValue(row, startingPointY, REPRESENTATIVE_LETTER);
+            plane.setValue(row, finalPointY, REPRESENTATIVE_LETTER);
         }        
-        for (int i = startingPointY; i < finalPointY; i++) {
+        for (int i = startingPointY; i <= finalPointY; i++) {
             plane.setValue(startingPointX, i, REPRESENTATIVE_LETTER);
             plane.setValue(finalPointX, i, REPRESENTATIVE_LETTER);
         }        
