@@ -65,9 +65,14 @@ public class Room {
         readjustHallTemperature(schematicPlane, temperaturePlane, temperature);
     }
     
-    private void readjustHallTemperature(Dimension schematicPlane, Dimension temperaturePlane, Integer temperature){
+    private void readjustHallTemperature(Dimension schematicPlane, Dimension temperaturePlane, Integer temperature){        
+        verificateRows(schematicPlane, temperaturePlane, temperature);
+        verificateColumns(schematicPlane, temperaturePlane, temperature);
+    }
+    
+    private void verificateRows(Dimension schematicPlane, Dimension temperaturePlane, Integer temperature){
         Point2D startingPoint = this.coordinate.getCoordinate()[0];
-        Point2D finalPoint = this.coordinate.getCoordinate()[1];        
+        Point2D finalPoint = this.coordinate.getCoordinate()[1];
         int startingPointX = startingPoint.getX();
         int startingPointY = startingPoint.getY();
         int finalPointX = finalPoint.getX();
@@ -80,7 +85,17 @@ public class Room {
             if(finalPointX+1 <= schematicPlane.getRows()-1 && hasHallValue(schematicPlane, finalPointX+1, column)){
                 addTemperature(temperaturePlane, finalPointX+1, column, temperature);               
             }
-        }        
+        }
+    }
+    
+    private void verificateColumns(Dimension schematicPlane, Dimension temperaturePlane, Integer temperature){
+        Point2D startingPoint = this.coordinate.getCoordinate()[0];
+        Point2D finalPoint = this.coordinate.getCoordinate()[1];
+        int startingPointX = startingPoint.getX();
+        int startingPointY = startingPoint.getY();
+        int finalPointX = finalPoint.getX();
+        int finalPointY = finalPoint.getY();
+        
         for(int row = startingPointX; row<=finalPointX; row++){
             if(startingPointY-1 >= 0 && hasHallValue(schematicPlane, row, startingPointY-1)){
                 addTemperature(temperaturePlane, row, startingPointY-1, temperature);             
