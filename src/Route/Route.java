@@ -20,14 +20,9 @@ public class Route {
         
         while(!mound.isEmpty()){
             partialSolution = mound.poll();
-            if(partialSolution.isSolution()){
-                if(solution == null){
-                    solution = partialSolution.clone();
-                    quota = partialSolution.evaluatedQuote();
-                }else if(partialSolution.getConsumedPoints() < solution.getConsumedPoints()){                
-                    solution = partialSolution.clone();
-                    quota = partialSolution.evaluatedQuote();
-                }
+            if(partialSolution.isSolution() && (solution == null || partialSolution.getConsumedPoints() < solution.getConsumedPoints())){
+                solution = partialSolution.clone();
+                quota = partialSolution.evaluatedQuote();
             }else{
                 for(AgentRoute sonAgentRoute: partialSolution.complections()){
                     int agentQuota = sonAgentRoute.evaluatedQuote();
@@ -38,13 +33,7 @@ public class Route {
             }
             
             if(mound.size() > 500000){
-                PriorityQueue<AgentRoute> newMound = new PriorityQueue<>();
-                for(int size = 0; size<5000; size++){
-                    AgentRoute proof = mound.poll();
-                    newMound.add(proof);
-                }
-                mound.clear();
-                mound = newMound;
+                mound = reduceQueue(mound);
             }
         }
         
@@ -59,5 +48,17 @@ public class Route {
         
         return solution.getRoute();
         
+    }
+    
+    private static PriorityQueue<AgentRoute> reduceQueue(PriorityQueue<AgentRoute> mound){    
+        PriorityQueue<AgentRoute> newMound = new PriorityQueue<>();
+        for(int size = 0; size<5000; size++){
+            AgentRoute proof = mound.poll();
+            newMound.add(proof);
+        }
+        mound.clear();
+        mound = newMound;
+        
+        return mound;
     }
 }
