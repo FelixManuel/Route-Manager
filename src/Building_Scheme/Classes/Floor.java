@@ -11,7 +11,7 @@ import java.util.HashMap;
 public class Floor {
     //Attributes
     private Dimension plane;
-    private HashMap<String,Dimension> planes;
+    private HashMap<String,Dimension> planes = new HashMap<>();
     private HashMap<String,Room> rooms;
     private HashMap<String,Elevator> elevators;
     private HashMap<String,Stairs> stairs;

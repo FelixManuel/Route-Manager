@@ -1,17 +1,17 @@
 {
     "name": "floor_0",
     "rooms": [
-        {"name": "room_10",
-         "temperature": 99},
         {"name": "room_5",
-         "temperature": 99},
-        {"name": "room_11",
          "temperature": 99},
         {"name": "room_6",
          "temperature": 99},
-        {"name": "room_4",
+        {"name": "room_11",
          "temperature": 99},
-        {"name": "room_9",
+        {"name": "room_15",
+         "temperature": 99},
+        {"name": "room_16",
+         "temperature": 99},
+        {"name": "room_21",
          "temperature": 99}
     ]
 }

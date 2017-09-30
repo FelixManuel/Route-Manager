@@ -7,6 +7,7 @@ import Utilities.Point2D;
 import java.util.HashMap;
 
 /**
+ * This class represents the Elevator in the plane.
  * @author Felix Manuel Mellado
  */
 public class Elevator {
@@ -18,6 +19,11 @@ public class Elevator {
     private static final String REPRESENTATIVE_LETTER = "E";
     
     //Methods
+
+    /**
+     * Create the elevator in the building.
+     * @param plane
+     */
     public void createElevator(Dimension plane){
         Point2D startingPoint = this.coordinate.getCoordinate()[0];
         Point2D finalPoint = this.coordinate.getCoordinate()[1];

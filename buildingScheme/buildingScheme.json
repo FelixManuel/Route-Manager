@@ -2,12 +2,11 @@
   "name": "Home",
   "floors":
     { "floor_0": {
-        "plane": { "rows": 30, "columns": 31 },
-        "planes":{},
+        "plane": { "rows": 16, "columns": 14 },
         "elevators":{},
         "rooms":
-             { "room_1": {
-                    "coordinate": { "coordinate": [
+				   { "kitchen": {
+					      "coordinate": { "coordinate": [
 					         {"x": 0, "y": 0},
 				             {"x": 5, "y": 5}
 					      ]},
@@ -15,88 +14,13 @@
 					      "doors":
 						       { "door_1": {
 							          "coordinate": { "coordinate": [
-							             {"x": 1, "y": 5},
-								         {"x": 1, "y": 5}
-                                       ]}
+							             {"x": 4, "y": 5},
+								           {"x": 4, "y": 5}
+                        ]}
 					           }
-                           }
-             },
-             "room_2": {
-                "coordinate": { "coordinate": [
-                   {"x": 5, "y": 0},
-                   {"x": 10, "y": 5}
-                ]},
-                "windows":{},
-                "doors":
-                   { "door_1": {
-                        "coordinate": { "coordinate": [
-                           {"x": 6, "y": 5},
-                           {"x": 6, "y": 5}
-                         ]}
-                     }
                    }
              },
-             "room_3": {
-                "coordinate": { "coordinate": [
-                   {"x": 10, "y": 0},
-                   {"x": 15, "y": 5}
-                ]},
-                "windows":{},
-                "doors":
-                   { "door_1": {
-                        "coordinate": { "coordinate": [
-                           {"x": 11, "y": 5},
-                           {"x": 11, "y": 5}
-                         ]}
-                     }
-                   }
-             },
-             "room_4": {
-                "coordinate": { "coordinate": [
-                   {"x": 15, "y": 0},
-                   {"x": 20, "y": 5}
-                ]},
-                "windows":{},
-                "doors":
-                   { "door_1": {
-                        "coordinate": { "coordinate": [
-                           {"x": 19, "y": 5},
-                           {"x": 19, "y": 5}
-                         ]}
-                     }
-                   }
-             },
-             "room_5": {
-                "coordinate": { "coordinate": [
-                   {"x": 20, "y": 0},
-                   {"x": 25, "y": 5}
-                ]},
-                "windows":{},
-                "doors":
-                   { "door_1": {
-                        "coordinate": { "coordinate": [
-                           {"x": 24, "y": 5},
-                           {"x": 24, "y": 5}
-                         ]}
-                     }
-                   }
-             },
-             "room_6": {
-                "coordinate": { "coordinate": [
-                   {"x": 25, "y": 0},
-                   {"x": 29, "y": 5}
-                ]},
-                "windows":{},
-                "doors":
-                   { "door_1": {
-                        "coordinate": { "coordinate": [
-                           {"x": 28, "y": 5},
-                           {"x": 28, "y": 5}
-                         ]}
-                     }
-                   }
-             },
-             "room_7": {
+             "living_room": {
                 "coordinate": { "coordinate": [
                    {"x": 3, "y": 8},
                    {"x": 8, "y": 13}
@@ -107,253 +31,67 @@
                         "coordinate": { "coordinate": [
                            {"x": 4, "y": 8},
                            {"x": 4, "y": 8}
-                         ]}
+                        ]}
                      }
                    }
              },
-             "room_8": {
-                "coordinate": { "coordinate": [
-                   {"x": 8, "y": 8},
-                   {"x": 13, "y": 13}
-                ]},
-                "windows":{},
-                "doors":
-                   { "door_1": {
-                        "coordinate": { "coordinate": [
-                           {"x": 9, "y": 8},
-                           {"x": 9, "y": 8}
-                         ]}
-                     }
+           "bathroom": {
+              "coordinate": { "coordinate": [
+                 {"x": 5, "y": 0},
+                 {"x": 10, "y": 5}
+              ]},
+              "windows":{},
+              "doors":
+                 { "door_1": {
+                      "coordinate": { "coordinate": [
+                         {"x": 9, "y": 5},
+                         {"x": 9, "y": 5}
+                      ]}
                    }
-             },
-             "room_9": {
-                "coordinate": { "coordinate": [
-                   {"x": 13, "y": 8},
-                   {"x": 18, "y": 13}
-                ]},
-                "windows":{},
-                "doors":
-                   { "door_1": {
-                        "coordinate": { "coordinate": [
-                           {"x": 17, "y": 8},
-                           {"x": 17, "y": 8}
-                         ]}
-                     }
-                   }
-             },
-             "room_10": {
-                "coordinate": { "coordinate": [
-                   {"x": 18, "y": 8},
-                   {"x": 23, "y": 13}
-                ]},
-                "windows":{},
-                "doors":
-                   { "door_1": {
-                        "coordinate": { "coordinate": [
-                           {"x": 22, "y": 8},
-                           {"x": 22, "y": 8}
-                         ]}
-                     }
-                   }
-             },
-             "room_11": {
-                "coordinate": { "coordinate": [
-                   {"x": 23, "y": 8},
-                   {"x": 26, "y": 13}
-                ]},
-                "windows":{},
-                "doors":
-                   { "door_1": {
-                        "coordinate": { "coordinate": [
-                           {"x": 25, "y": 8},
-                           {"x": 25, "y": 8}
-                         ]}
-                     }
-                   }
-             },
-             "garden": {
-                "coordinate": { "coordinate": [
-                   {"x": 3, "y": 13},
-                   {"x": 26, "y": 17}
-                ]},
-                "windows":{},
-                "doors":{}
-             },
-             "room_12": {
-                "coordinate": { "coordinate": [
-                   {"x": 3, "y": 17},
-                   {"x": 8, "y": 22}
-                ]},
-                "windows":{},
-                "doors":
-                   { "door_1": {
-                        "coordinate": { "coordinate": [
-                           {"x": 4, "y": 22},
-                           {"x": 4, "y": 22}
-                         ]}
-                     }
-                   }
-             },
-             "room_13": {
-                "coordinate": { "coordinate": [
-                   {"x": 8, "y": 17},
-                   {"x": 13, "y": 22}
-                ]},
-                "windows":{},
-                "doors":
-                   { "door_1": {
-                        "coordinate": { "coordinate": [
-                           {"x": 9, "y": 22},
-                           {"x": 9, "y": 22}
-                         ]}
-                     }
-                   }
-             },
-             "room_14": {
-                "coordinate": { "coordinate": [
-                   {"x": 13, "y": 17},
-                   {"x": 18, "y": 22}
-                ]},
-                "windows":{},
-                "doors":
-                   { "door_1": {
-                        "coordinate": { "coordinate": [
-                           {"x": 17, "y": 22},
-                           {"x": 17, "y": 22}
-                         ]}
-                     }
-                   }
-             },
-             "room_15": {
-                "coordinate": { "coordinate": [
-                   {"x": 18, "y": 17},
-                   {"x": 23, "y": 22}
-                ]},
-                "windows":{},
-                "doors":
-                   { "door_1": {
-                        "coordinate": { "coordinate": [
-                           {"x": 22, "y": 22},
-                           {"x": 22, "y": 22}
-                         ]}
-                     }
-                   }
-             },
-             "room_16": {
-                "coordinate": { "coordinate": [
-                   {"x": 23, "y": 17},
-                   {"x": 26, "y": 22}
-                ]},
-                "windows":{},
-                "doors":
-                   { "door_1": {
-                        "coordinate": { "coordinate": [
-                           {"x": 25, "y": 22},
-                           {"x": 25, "y": 22}
-                         ]}
-                     }
-                   }
-             },
-             "room_17": {
-                "coordinate": { "coordinate": [
-                   {"x": 0, "y": 25},
-                   {"x": 5, "y": 30}
-                ]},
-                "windows":{},
-                "doors":
-                   { "door_1": {
-                        "coordinate": { "coordinate": [
-                           {"x": 1, "y": 25},
-                           {"x": 1, "y": 25}
-                         ]}
-                     }
-                   }
-             },
-             "room_18": {
-                "coordinate": { "coordinate": [
-                   {"x": 5, "y": 25},
-                   {"x": 10, "y": 30}
-                ]},
-                "windows":{},
-                "doors":
-                   { "door_1": {
-                        "coordinate": { "coordinate": [
-                           {"x": 6, "y": 25},
-                           {"x": 6, "y": 25}
-                         ]}
-                     }
-                   }
-             },
-             "room_19": {
-                "coordinate": { "coordinate": [
-                   {"x": 10, "y": 25},
-                   {"x": 15, "y": 30}
-                ]},
-                "windows":{},
-                "doors":
-                   { "door_1": {
-                        "coordinate": { "coordinate": [
-                           {"x": 11, "y": 25},
-                           {"x": 11, "y": 25}
-                         ]}
-                     }
-                   }
-             },
-             "room_20": {
-                "coordinate": { "coordinate": [
-                   {"x": 15, "y": 25},
-                   {"x": 20, "y": 30}
-                ]},
-                "windows":{},
-                "doors":
-                   { "door_1": {
-                        "coordinate": { "coordinate": [
-                           {"x": 19, "y": 25},
-                           {"x": 19, "y": 25}
-                         ]}
-                     }
-                   }
-             },
-             "room_21": {
-                "coordinate": { "coordinate": [
-                   {"x": 20, "y": 25},
-                   {"x": 25, "y": 30}
-                ]},
-                "windows":{},
-                "doors":
-                   { "door_1": {
-                        "coordinate": { "coordinate": [
-                           {"x": 24, "y": 25},
-                           {"x": 24, "y": 25}
-                         ]}
-                     }
-                   }
-             }
+                 }
            },
-           "stairs":{},
+           "bedroom": {
+              "coordinate": { "coordinate": [
+                 {"x": 8, "y": 8},
+                 {"x": 13, "y": 13}
+              ]},
+              "windows":{},
+              "doors":
+                 { "door_1": {
+                      "coordinate": { "coordinate": [
+                         {"x": 9, "y": 8},
+                         {"x": 9, "y": 8}
+                      ]}
+                   }
+                 }
+           },
+           "room": {
+              "coordinate": { "coordinate": [
+                 {"x": 10, "y": 0},
+                 {"x": 15, "y": 5}
+              ]},
+              "windows":{},
+              "doors":
+                 { "door_1": {
+                      "coordinate": { "coordinate": [
+                         {"x": 14, "y": 5},
+                         {"x": 14, "y": 5}
+                      ]}
+                   }
+                 }
+           }},
+			  "stairs":{},
         "doors":
-           {"emergency_1": {
+           { "entry": {
                 "coordinate": { "coordinate": [
                    {"x": 0, "y": 6 },
-                   {"x": 0, "y": 6 }
+                   {"x": 0, "y": 7 }
                 ]}
              },
-               "emergency_2": {
+             "garden":{
                 "coordinate": { "coordinate": [
-                   {"x": 0, "y": 24 },
-                   {"x": 0, "y": 24 }
-                ]}
-             },
-           "emergency_3": {
-                "coordinate": { "coordinate": [
-                   {"x": 29, "y": 6 },
-                   {"x": 29, "y": 6 }
-                ]}
-             },
-           "emergency_4": {
-                "coordinate": { "coordinate": [
-                   {"x": 29, "y": 24 },
-                   {"x": 29, "y": 24 }
+                    {"x":14, "y":13},
+                    {"x":14, "y":13}
                 ]}
              }},
         "windows":{}

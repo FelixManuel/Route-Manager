@@ -11,7 +11,9 @@ import Route.AgentRoute;
 import Route.EvacuationAgentRoute;
 import Route.FireAgentRoute;
 import Route.Route;
+import Route.RouteBranchPruning;
 import Utilities.Point2D;
+import com.google.gson.Gson;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -37,19 +39,25 @@ public class Controller {
         this.agents = new HashMap<>();
     }
     
-    public Controller(BuildingScheme building){
+    public Controller(String buildingString){
+        Gson gson = new Gson();
+        BuildingScheme building = gson.fromJson(buildingString, BuildingScheme.class);
         this.building = building;
         this.building.buildFloors();
         this.agents = new HashMap<>();
     }
     
     //Methods
-    public void addAgent(AgentScheme agent){
+    public void addAgent(String agentString){
+        Gson gson = new Gson();
+        AgentScheme agent = gson.fromJson(agentString, AgentScheme.class);
         this.agents.put(agent.getIdentification(), agent);
     }
     
-    public void addAgents(ArrayList<AgentScheme> agents){
-        for(AgentScheme agent: agents){
+    public void addAgents(ArrayList<String> agents){
+        Gson gson = new Gson();
+        for(String agentString: agents){
+            AgentScheme agent = gson.fromJson(agentString, AgentScheme.class);
             this.agents.put(agent.getIdentification(), agent);
         }
     }
@@ -58,12 +66,16 @@ public class Controller {
         loadingAgents();
     }
     
-    public void addFloorStatus(FloorStatus floorStatus){
+    public void addFloorStatus(String floorStatusString){
+        Gson gson = new Gson();
+        FloorStatus floorStatus = gson.fromJson(floorStatusString, FloorStatus.class);
         this.building.updateTemperatureFloors(floorStatus);
     }
     
-    public void addFloorsStatus(ArrayList<FloorStatus> floorsStatus){
-        for(FloorStatus floorStatus: floorsStatus){
+    public void addFloorsStatus(ArrayList<String> floorsStatus){
+        Gson gson = new Gson();
+        for(String floorStatusString: floorsStatus){
+            FloorStatus floorStatus = gson.fromJson(floorStatusString, FloorStatus.class);
             this.building.updateTemperatureFloors(floorStatus);
         }
     }
@@ -115,7 +127,8 @@ public class Controller {
         for(AgentScheme agent: this.agents.values()){
             CoordAgent coordinateAgent = agent.getCoordinate();
             agentRoute = new FireAgentRoute(exits, temperaturePlanes, rows, columns, coordinateAgent);
-            ArrayList<CoordAgent> route = Route.generationRoute(agentRoute);
+            Route routeBP = new RouteBranchPruning();
+            ArrayList<CoordAgent> route = routeBP.generationRoute(agentRoute);
             agent.setRoute(route);
             FileInformation.saveAgentRoute(agent, "FireEvacuation_"+agent.getIdentification());            
             printRoute(agent.getIdentification());
@@ -132,7 +145,8 @@ public class Controller {
         for(AgentScheme agent: this.agents.values()){
             CoordAgent coordinateAgent = agent.getCoordinate();
             agentRoute = new EvacuationAgentRoute(exits, planes, rows, columns, coordinateAgent);
-            ArrayList<CoordAgent> route = Route.generationRoute(agentRoute);
+            Route routeBP = new RouteBranchPruning();
+            ArrayList<CoordAgent> route = routeBP.generationRoute(agentRoute);
             agent.setRoute(route);
             FileInformation.saveAgentRoute(agent, "Evacuation_"+agent.getIdentification());
             printRoute(agent.getIdentification());

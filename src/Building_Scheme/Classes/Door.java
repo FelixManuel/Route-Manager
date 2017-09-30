@@ -5,6 +5,7 @@ import Building_Scheme.Utilities.Dimension;
 import Utilities.Point2D;
 
 /**
+ * This class represents the Door in the building
  * @author Felix Manuel Mellado
  */
 public class Door {
@@ -15,11 +16,21 @@ public class Door {
     private static final String REPRESENTATIVE_LETTER = "D";
     
     //Getter Methods
+
+    /**
+     * Returns the door coordinate in the plane.
+     * @return coordinate
+     */
     public CoordElemBuilding getCoordinate(){
         return this.coordinate;
     }
     
     //Methods
+
+    /**
+     * Create de door in the plane.
+     * @param plane
+     */
     public void createDoor(Dimension plane){
         Point2D startingPoint = this.coordinate.getCoordinate()[0];
         Point2D finalPoint = this.coordinate.getCoordinate()[1];
