@@ -8,10 +8,12 @@ import Building_Scheme.Utilities.Dimension;
 import Building_Status.FloorStatus;
 import File.FileInformation;
 import Route.AgentRoute;
-import Route.EvacuationAgentRoute;
-import Route.FireAgentRoute;
+import Route.EvacuationAgentRouteUC;
+import Route.EvacuationAgentRouteA;
+import Route.FireAgentRouteUC;
+import Route.FireAgentRouteA;
 import Route.Route;
-import Route.RouteBranchPruning;
+import Route.RouteBranchPruningA;
 import Utilities.Point2D;
 import com.google.gson.Gson;
 import java.io.File;
@@ -19,12 +21,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
+ * Controller that has to be implemented for third party if wants to use all the
+ * functions of this manager.
  * @author Felix Manuel Mellado
  */
 public class Controller {
     //Attributes
     private BuildingScheme building;
     private HashMap<Integer,AgentScheme> agents;
+    
     private static final String BUILDING_FOLDER = "buildingScheme//";
     private static final String AGENT_FOLDER = "agentScheme//";
     private static final String BUILDINGSTATUS_FOLDER = "buildingStatus//";
@@ -33,27 +38,47 @@ public class Controller {
     private static final String DOOR_LETTER = "D";
     
     //Constructor
+
+    /**
+     * Create Controller who adds the Building Scheme from defined folder.
+     */    
     public Controller(){
-        loadingBuilding();
-        this.building.buildFloors();
+        loadingBuilding();        
         this.agents = new HashMap<>();
+        
+        this.building.buildFloors();
     }
     
-    public Controller(String buildingString){
+    /**
+     * Create Controller and given the String param, adds the Building Scheme.
+     * @param building Remember that the String has to comply with the given json format.
+     */
+    public Controller(String building){
         Gson gson = new Gson();
-        BuildingScheme building = gson.fromJson(buildingString, BuildingScheme.class);
-        this.building = building;
-        this.building.buildFloors();
+        BuildingScheme buildingScheme = gson.fromJson(building, BuildingScheme.class);
+        
+        this.building = buildingScheme;        
         this.agents = new HashMap<>();
+        
+        this.building.buildFloors();
     }
     
     //Methods
-    public void addAgent(String agentString){
+
+    /**
+     * Add agent given the String param.
+     * @param agent Remember that the String has to comply with the given json format.
+     */
+    public void addAgent(String agent){
         Gson gson = new Gson();
-        AgentScheme agent = gson.fromJson(agentString, AgentScheme.class);
-        this.agents.put(agent.getIdentification(), agent);
+        AgentScheme agentScheme = gson.fromJson(agent, AgentScheme.class);
+        this.agents.put(agentScheme.getIdentification(), agentScheme);
     }
     
+    /**
+     * Add agents given the array with all the agents.
+     * @param agents Remember that the every String inside array has to comply with the given json format.
+     */
     public void addAgents(ArrayList<String> agents){
         Gson gson = new Gson();
         for(String agentString: agents){
@@ -62,16 +87,27 @@ public class Controller {
         }
     }
     
+    /**
+     * Add all agents from defined folder.
+     */
     public void addAgentsFromFolder(){
         loadingAgents();
     }
     
-    public void addFloorStatus(String floorStatusString){
+    /**
+     * Add floor status given the String param.
+     * @param floorStatus Remember that the String has to comply with the given json format.
+     */
+    public void addFloorStatus(String floorStatus){
         Gson gson = new Gson();
-        FloorStatus floorStatus = gson.fromJson(floorStatusString, FloorStatus.class);
-        this.building.updateTemperatureFloors(floorStatus);
+        FloorStatus floorStatusScheme = gson.fromJson(floorStatus, FloorStatus.class);
+        this.building.updateTemperatureFloors(floorStatusScheme);
     }
     
+    /**
+     * Add floors status given the array with all the floors status.
+     * @param floorsStatus Remember that the every String inside array has to comply with the given json format.
+     */
     public void addFloorsStatus(ArrayList<String> floorsStatus){
         Gson gson = new Gson();
         for(String floorStatusString: floorsStatus){
@@ -80,10 +116,16 @@ public class Controller {
         }
     }
     
+    /**
+     * Add floor status from defined folder.
+     */
     public void addFloorStatusFromFolder(){
         loadingBuildingStatus();
     }
     
+    /**
+     * Extract the Building Scheme from 'buildingScheme//' folder.
+     */
     private void loadingBuilding(){    
         BuildingScheme building;
         File buildingFolder = new File(BUILDING_FOLDER);
@@ -95,6 +137,9 @@ public class Controller {
         }
     }
     
+    /**
+     * Extract all Agent Scheme from 'agentScheme//' folder.
+     */
     private void loadingAgents(){     
         AgentScheme agentScheme;
         File agentFolder = new File(AGENT_FOLDER);
@@ -106,6 +151,9 @@ public class Controller {
         }
     }
     
+    /**
+     * Extract all Building Status from 'buildingStatus//' folder.
+     */
     private void loadingBuildingStatus(){
         FloorStatus floorStatus;
         File buildingStatusFolder = new File(BUILDINGSTATUS_FOLDER);
@@ -126,9 +174,27 @@ public class Controller {
         
         for(AgentScheme agent: this.agents.values()){
             CoordAgent coordinateAgent = agent.getCoordinate();
-            agentRoute = new FireAgentRoute(exits, temperaturePlanes, rows, columns, coordinateAgent);
-            Route routeBP = new RouteBranchPruning();
+            agentRoute = new FireAgentRouteUC(exits, temperaturePlanes, rows, columns, coordinateAgent);
+            Route routeBP = new RouteBranchPruningA();
             ArrayList<CoordAgent> route = routeBP.generationRoute(agentRoute);
+            agent.setRoute(route);
+            FileInformation.saveAgentRoute(agent, "FireEvacuation_"+agent.getIdentification());            
+            printRoute(agent.getIdentification());
+        }
+    }
+    
+    public void fireEvacuationA(){
+        AgentRoute agentRoute = null;
+        ArrayList<Point2D> exits = getExits();
+        HashMap<String, Dimension> temperaturePlanes = getTemperaturePlanes();
+        int rows = this.building.getFirstFloor().getPlane().getRows();
+        int columns = this.building.getFirstFloor().getPlane().getColumns();
+        
+        for(AgentScheme agent: this.agents.values()){
+            CoordAgent coordinateAgent = agent.getCoordinate();
+            agentRoute = new FireAgentRouteA(exits, temperaturePlanes, rows, columns, coordinateAgent);
+            Route routeProof = new RouteBranchPruningA();
+            ArrayList<CoordAgent> route = routeProof.generationRoute(agentRoute);
             agent.setRoute(route);
             FileInformation.saveAgentRoute(agent, "FireEvacuation_"+agent.getIdentification());            
             printRoute(agent.getIdentification());
@@ -144,9 +210,27 @@ public class Controller {
         
         for(AgentScheme agent: this.agents.values()){
             CoordAgent coordinateAgent = agent.getCoordinate();
-            agentRoute = new EvacuationAgentRoute(exits, planes, rows, columns, coordinateAgent);
-            Route routeBP = new RouteBranchPruning();
+            agentRoute = new EvacuationAgentRouteUC(exits, planes, rows, columns, coordinateAgent);
+            Route routeBP = new RouteBranchPruningA();
             ArrayList<CoordAgent> route = routeBP.generationRoute(agentRoute);
+            agent.setRoute(route);
+            FileInformation.saveAgentRoute(agent, "Evacuation_"+agent.getIdentification());
+            printRoute(agent.getIdentification());
+        }
+    }
+    
+    public void shortEvacuationA(){
+        AgentRoute agentRoute = null;
+        ArrayList<Point2D> exits = getExits();
+        HashMap<String, Dimension> planes = getPlanes();
+        int rows = this.building.getFirstFloor().getPlane().getRows();
+        int columns = this.building.getFirstFloor().getPlane().getColumns();
+        
+        for(AgentScheme agent: this.agents.values()){
+            CoordAgent coordinateAgent = agent.getCoordinate();
+            agentRoute = new EvacuationAgentRouteA(exits, planes, rows, columns, coordinateAgent);
+            Route routeProof = new RouteBranchPruningA();
+            ArrayList<CoordAgent> route = routeProof.generationRoute(agentRoute);
             agent.setRoute(route);
             FileInformation.saveAgentRoute(agent, "Evacuation_"+agent.getIdentification());
             printRoute(agent.getIdentification());

@@ -8,7 +8,7 @@ import java.util.PriorityQueue;
 /**
  * @author Feíx Manuel Mellado
  */
-public class RouteBranchPruning extends Route{
+public class RouteBranchPruningUC extends Route{
     
     public ArrayList<CoordAgent> generationRoute(AgentRoute agentRoute){
         PriorityQueue<AgentRoute> mound = new PriorityQueue<>();

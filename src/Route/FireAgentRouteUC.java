@@ -9,7 +9,7 @@ import java.util.HashMap;
 /**
  * @author Felix Manuel Mellado
  */
-public class FireAgentRoute extends AgentRoute{
+public class FireAgentRouteUC extends AgentRoute{
     //Attributes
     private int mediumTemperature = 0;
     
@@ -17,13 +17,13 @@ public class FireAgentRoute extends AgentRoute{
     private static final int DOOR_VALUE = 0; 
     
     //Constructor
-    public FireAgentRoute(ArrayList<Point2D> exits, HashMap<String, Dimension> planes, int rows, int columns, CoordAgent coordinateAgent) {
+    public FireAgentRouteUC(ArrayList<Point2D> exits, HashMap<String, Dimension> planes, int rows, int columns, CoordAgent coordinateAgent) {
         super(exits, planes, rows, columns, coordinateAgent);
         this.mediumTemperature = temperatureResult();
         this.setConsumedPoints(this.addConsumedPoint(this.getRoute().get(this.getRoute().size()-1)));
     }
     
-    private FireAgentRoute(ArrayList<Point2D> exits, ArrayList<CoordAgent> route, int movements,
+    private FireAgentRouteUC(ArrayList<Point2D> exits, ArrayList<CoordAgent> route, int movements,
                        int consumedPoints, HashMap<String, Dimension> temperaturePlanes, int rows, int columns,
                        int mediumTemperature){
         super(exits, route, movements, consumedPoints, temperaturePlanes, rows, columns);
@@ -49,13 +49,76 @@ public class FireAgentRoute extends AgentRoute{
             
             int calculate = (Math.abs(exitX-actualPositionX) + Math.abs(exitY-actualPositionY));
             
-            int newResult = (int)(calculate * 0.25 + calculate);
+            int newResult = calculate;
             if(newResult < result){
                 result = newResult;
             }
         }        
         
-        return result * this.mediumTemperature;
+        return result;
+    }
+    
+        @Override
+    protected ArrayList<Point2D> generatePoints(CoordAgent agent){
+            Point2D lastPosition = agent.getCoordinate();
+        String nameFloor = agent.getNameFloor();
+        ArrayList<Point2D> solution = new ArrayList<>();
+        
+        int lastPositionX = lastPosition.getX();
+        int lastPositionY = lastPosition.getY();
+        
+        Point2D rowLess = new Point2D(lastPositionX-1, lastPositionY);
+        Point2D rowMore = new Point2D(lastPositionX+1, lastPositionY);
+        Point2D columnLess = new Point2D(lastPositionX, lastPositionY-1);
+        Point2D columnMore = new Point2D(lastPositionX, lastPositionY+1);
+        
+        Point2D upperRightDiagonal = new Point2D(lastPositionX-1, lastPositionY+1);
+        Point2D upperLeftDiagonal = new Point2D(lastPositionX-1, lastPositionY-1);
+        Point2D downRightDiagonal = new Point2D(lastPositionX+1, lastPositionY+1);
+        Point2D downLeftDiagonal = new Point2D(lastPositionX+1, lastPositionY-1);
+        
+        solution.add(rowLess);
+        solution.add(rowMore);
+        solution.add(columnLess);
+        solution.add(columnMore);
+        
+        solution.add(upperRightDiagonal);
+        solution.add(upperLeftDiagonal);
+        solution.add(downRightDiagonal);
+        solution.add(downLeftDiagonal);
+        
+        ArrayList<Point2D> elementsToRemove = new ArrayList<>();
+        int solutionSize = solution.size();
+        
+        for(int iterator = 0; iterator<solutionSize; iterator++){
+            Point2D point = solution.get(iterator);
+            if(!exist(point) || !isValid(point,nameFloor) || goneThere(point) || upTemperature(point,nameFloor)){
+                elementsToRemove.add(point);
+            }
+        }
+        
+        for(Point2D point: elementsToRemove){
+            solution.remove(point);
+        }
+        
+        return solution;
+    }
+    
+    private boolean upTemperature(Point2D point, String nameFloor){
+        boolean upTemperature = false;
+        Dimension plane = this.getPlanes().get(nameFloor);        
+        int pointX = point.getX();
+        int pointY = point.getY();        
+        String value = plane.getValue(pointX, pointY);
+        
+        if(isNumeric(value)){        
+            int temperature  = Integer.parseInt(value);
+            if(temperature > 50){
+                upTemperature = true;
+            }        
+        }
+        
+        return upTemperature;
     }
 
     @Override
@@ -96,14 +159,27 @@ public class FireAgentRoute extends AgentRoute{
     }
 
     @Override
-    public FireAgentRoute clone() {
+    public FireAgentRouteUC clone() {
         HashMap<String,Dimension> temperaturePlanes = new HashMap<>(this.getPlanes());
         ArrayList<CoordAgent> route = new ArrayList<>(this.getRoute());
-        FireAgentRoute newAgent = new FireAgentRoute(this.getExits(), route, this.getMovements(),
+        FireAgentRouteUC newAgent = new FireAgentRouteUC(this.getExits(), route, this.getMovements(),
                                                      this.getConsumedPoints(), temperaturePlanes,
                                                      this.getRows(), this.getColumns(), this.mediumTemperature);
         
         return newAgent;
+    }
+    
+        @Override
+    public int compareTo(Object agent){
+        AgentRoute newAgent = (AgentRoute) agent;
+        
+        if(this.narrow() < newAgent.narrow()){
+            return -1;
+        }else if(narrow() > newAgent.narrow()){
+            return +1;
+        }else{
+            return 0;
+        }
     }
     
 }

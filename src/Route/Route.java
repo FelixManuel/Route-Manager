@@ -15,7 +15,7 @@ public abstract class Route {
     
     protected static PriorityQueue<AgentRoute> reduceQueue(PriorityQueue<AgentRoute> mound){    
         PriorityQueue<AgentRoute> newMound = new PriorityQueue<>();
-        for(int size = 0; size<5000; size++){
+        for(int size = 0; size<15000; size++){
             AgentRoute proof = mound.poll();
             newMound.add(proof);
         }

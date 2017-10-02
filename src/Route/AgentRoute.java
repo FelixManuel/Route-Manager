@@ -134,7 +134,7 @@ public abstract class AgentRoute implements Comparable{
         return complections;
     }
     
-    private ArrayList<Point2D> generatePoints(CoordAgent agent){
+    protected ArrayList<Point2D> generatePoints(CoordAgent agent){
         Point2D lastPosition = agent.getCoordinate();
         String nameFloor = agent.getNameFloor();
         ArrayList<Point2D> solution = new ArrayList<>();
@@ -179,7 +179,7 @@ public abstract class AgentRoute implements Comparable{
         return solution;
     }
     
-    private boolean exist(Point2D point){
+    protected boolean exist(Point2D point){
         boolean exist = true;
         int pointX = point.getX();
         int pointY = point.getY();
@@ -191,7 +191,7 @@ public abstract class AgentRoute implements Comparable{
         return exist;
     }
     
-    private boolean isValid(Point2D point, String nameFloor){
+    protected boolean isValid(Point2D point, String nameFloor){
         boolean valid = true;
         Dimension plane = this.planes.get(nameFloor);
         int pointX = point.getX();
@@ -207,7 +207,7 @@ public abstract class AgentRoute implements Comparable{
         return valid;
     }
     
-    private boolean goneThere(Point2D point){
+    protected boolean goneThere(Point2D point){
         boolean goneThere = false;
         Iterator routeIterator = this.route.iterator();
         
