@@ -8,12 +8,10 @@ import Building_Scheme.Utilities.Dimension;
 import Building_Status.FloorStatus;
 import File.FileInformation;
 import Route.AgentRoute;
-import Route.EvacuationAgentRouteUC;
 import Route.EvacuationAgentRouteA;
-import Route.FireAgentRouteUC;
 import Route.FireAgentRouteA;
 import Route.Route;
-import Route.RouteBranchPruningA;
+import Route.RouteAStar;
 import Utilities.Point2D;
 import com.google.gson.Gson;
 import java.io.File;
@@ -165,24 +163,6 @@ public class Controller {
         }
     }
     
-    public void fireEvacuation(){
-        AgentRoute agentRoute = null;
-        ArrayList<Point2D> exits = getExits();
-        HashMap<String, Dimension> temperaturePlanes = getTemperaturePlanes();
-        int rows = this.building.getFirstFloor().getPlane().getRows();
-        int columns = this.building.getFirstFloor().getPlane().getColumns();
-        
-        for(AgentScheme agent: this.agents.values()){
-            CoordAgent coordinateAgent = agent.getCoordinate();
-            agentRoute = new FireAgentRouteUC(exits, temperaturePlanes, rows, columns, coordinateAgent);
-            Route routeBP = new RouteBranchPruningA();
-            ArrayList<CoordAgent> route = routeBP.generationRoute(agentRoute);
-            agent.setRoute(route);
-            FileInformation.saveAgentRoute(agent, "FireEvacuation_"+agent.getIdentification());            
-            printRoute(agent.getIdentification());
-        }
-    }
-    
     public void fireEvacuationA(){
         AgentRoute agentRoute = null;
         ArrayList<Point2D> exits = getExits();
@@ -193,28 +173,10 @@ public class Controller {
         for(AgentScheme agent: this.agents.values()){
             CoordAgent coordinateAgent = agent.getCoordinate();
             agentRoute = new FireAgentRouteA(exits, temperaturePlanes, rows, columns, coordinateAgent);
-            Route routeProof = new RouteBranchPruningA();
+            Route routeProof = new RouteAStar();
             ArrayList<CoordAgent> route = routeProof.generationRoute(agentRoute);
             agent.setRoute(route);
             FileInformation.saveAgentRoute(agent, "FireEvacuation_"+agent.getIdentification());            
-            printRoute(agent.getIdentification());
-        }
-    }
-    
-    public void shortEvacuation(){
-        AgentRoute agentRoute = null;
-        ArrayList<Point2D> exits = getExits();
-        HashMap<String, Dimension> planes = getPlanes();
-        int rows = this.building.getFirstFloor().getPlane().getRows();
-        int columns = this.building.getFirstFloor().getPlane().getColumns();
-        
-        for(AgentScheme agent: this.agents.values()){
-            CoordAgent coordinateAgent = agent.getCoordinate();
-            agentRoute = new EvacuationAgentRouteUC(exits, planes, rows, columns, coordinateAgent);
-            Route routeBP = new RouteBranchPruningA();
-            ArrayList<CoordAgent> route = routeBP.generationRoute(agentRoute);
-            agent.setRoute(route);
-            FileInformation.saveAgentRoute(agent, "Evacuation_"+agent.getIdentification());
             printRoute(agent.getIdentification());
         }
     }
@@ -229,7 +191,7 @@ public class Controller {
         for(AgentScheme agent: this.agents.values()){
             CoordAgent coordinateAgent = agent.getCoordinate();
             agentRoute = new EvacuationAgentRouteA(exits, planes, rows, columns, coordinateAgent);
-            Route routeProof = new RouteBranchPruningA();
+            Route routeProof = new RouteAStar();
             ArrayList<CoordAgent> route = routeProof.generationRoute(agentRoute);
             agent.setRoute(route);
             FileInformation.saveAgentRoute(agent, "Evacuation_"+agent.getIdentification());

@@ -108,15 +108,19 @@ public class Dimension {
             for (int column = 0; column < this.plane[row].length; column++) {
                 value = this.getValue(row, column);
                 if((value.equals("W") || value.equals("w") || value.equals("E") || value.equals("S"))&&(row == 0 || row == this.plane.length-1)){
-                    value = "\u001B[30m-";
+//                    value = "\u001B[30m-";
+                      value = "-";
                 }else if((value.equals("W") || value.equals("w") || value.equals("E") || value.equals("S"))&&(column == 0 || column == this.plane[row].length-1)){
-                    value = "\u001B[30m|";
+//                    value = "\u001B[30m|";
+                      value = "|";
                 }else if(value.equals("D")){
                     value = " ";
                 }else if(value.equals("W") || value.equals("E") || value.equals("S")){
-                    value = "\u001B[30m\\";
+                    //value = "\u001B[30m\\";
+                    value = "\\";
                 }else if(value.equals("X")){
-                    value = "\u001B[34mX";
+//                    value = "\u001B[34mX";
+                    value = "X";
                 }
                 representationPlane.append(value + " ");
             }            
@@ -134,9 +138,9 @@ public class Dimension {
         for (int row = 0; row < this.plane.length; row++) {
             for (int column = 0; column < this.plane[row].length; column++){
                 if(Dimension.isNumeric(this.getValue(row, column))){
-                    representationPlane.append(colorBlue + this.getValue(row, column) + " ");
+                    representationPlane.append(this.getValue(row, column) + " ");
                 }else{
-                    representationPlane.append(colorBlack + this.getValue(row, column) + "  ");
+                    representationPlane.append(this.getValue(row, column) + "  ");
                 }
             }
             representationPlane.append("\n");

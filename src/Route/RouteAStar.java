@@ -6,31 +6,27 @@ import java.util.ArrayList;
 import java.util.PriorityQueue;
 
 /**
- * @author Feíx Manuel Mellado
+ * @author Felix Manuel Mellado
  */
-public class RouteBranchPruningUC extends Route{
-    
+public class RouteAStar extends Route{
+
+    @Override
     public ArrayList<CoordAgent> generationRoute(AgentRoute agentRoute){
         PriorityQueue<AgentRoute> mound = new PriorityQueue<>();
-        int quota = agentRoute.narrow();
         AgentRoute solution = null;
         AgentRoute partialSolution = null;
         mound.add(agentRoute);
         
-        while(!mound.isEmpty()){
+        while(!mound.isEmpty() && solution == null){
             partialSolution = mound.poll();
-            if(partialSolution.isSolution() && (solution == null || partialSolution.getConsumedPoints() < solution.getConsumedPoints())){
+            if(partialSolution.isSolution()){
                 solution = partialSolution.clone();
-                quota = partialSolution.evaluatedQuote();
             }else{
                 for(AgentRoute sonAgentRoute: partialSolution.complections()){
                     int agentQuota = sonAgentRoute.evaluatedQuote();
-                    if(agentQuota <= quota){
-                        mound.add(sonAgentRoute);
-                    }
+                    mound.add(sonAgentRoute);                    
                 }
             }
-            
             if(mound.size() > 500000){
                 mound = reduceQueue(mound);
             }
